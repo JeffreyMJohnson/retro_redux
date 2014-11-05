@@ -25,7 +25,6 @@ extern const int NUM_ENEMYS = 36;
 extern const int NUM_ENEMY_COLS = 9;
 extern const int NUM_ENEMY_ROWS = 4;
 
-
 int main(int argc, char* argv[])
 {
 	Initialise(screenWidth, screenHeight, false, "Galaxian Clone");

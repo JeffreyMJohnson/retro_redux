@@ -60,6 +60,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>../include/;./;./include/</AdditionalIncludeDirectories>
       <FunctionLevelLinking>true</FunctionLevelLinking>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>NotSet</SubSystem>
@@ -106,6 +107,7 @@
     <ClCompile Include="source\Player.cpp" />
     <ClCompile Include="source\SplashScreenState.cpp" />
     <ClCompile Include="source\StateMachine.cpp" />
+    <ClCompile Include="source\TheMath.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\BaseState.h" />
@@ -122,7 +124,11 @@
     <ClInclude Include="include\Player.h" />
     <ClInclude Include="include\SplashScreenState.h" />
     <ClInclude Include="include\StateMachine.h" />
+    <ClInclude Include="include\TheMath.h" />
     <ClInclude Include="include\Utility.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
