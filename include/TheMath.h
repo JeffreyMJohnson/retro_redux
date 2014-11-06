@@ -3,6 +3,8 @@
 #ifndef _THE_MATH_H_
 #define _THE_MATH_H_
 
+#include <math.h>
+
 class Vector2
 {
 public:
@@ -37,12 +39,12 @@ public:
 	float Magnitude();
 
 	/*
-	normalise this Vector2
+	normalize this Vector2
 	*/
-	void Normalise();
+	void Normalize();
 
 	/*
-	return normalised Vector2 from values of this one. This vector is not changed.
+	return normalized Vector2 from values of this one. This vector is not changed.
 	*/
 	Vector2 GetNormal();
 
