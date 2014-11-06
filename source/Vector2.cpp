@@ -1,4 +1,7 @@
-#include "..\include\TheMath.h"
+#ifndef _VECTOR_2_H_
+#define _VECTOR_2_H_
+
+#include "TheMath.h"
 
 Vector2::Vector2()
 {
@@ -67,6 +70,14 @@ bool Vector2::operator==(const Vector2& other)
 	return false;
 }
 
+/*
+returns false if given other Vector2 is either the same object as this or x and y are equal, else returns true
+*/
+bool Vector2::operator!=(const Vector2& other)
+{
+	return !(*this == other);
+}
+
 //vector math functions
 /*
 returns magnitude of this vector
@@ -91,8 +102,9 @@ return normalized Vector2 from values of this one. This vector is not changed.
 */
 Vector2 Vector2::GetNormal()
 {
-	float mag = Magnitude();
-	return Vector2(x / mag, y / mag);
+	Vector2 v = *this;
+	v.Normalize();
+	return v;
 }
 
 /*
@@ -108,3 +120,5 @@ Vector2 Vector2::GetPerp()
 {
 	return Vector2(this->y, -this->x);
 }
+
+#endif
