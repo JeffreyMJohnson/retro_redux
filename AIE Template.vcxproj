@@ -107,7 +107,7 @@
     <ClCompile Include="source\Player.cpp" />
     <ClCompile Include="source\SplashScreenState.cpp" />
     <ClCompile Include="source\StateMachine.cpp" />
-    <ClCompile Include="source\TheMath.cpp" />
+    <ClCompile Include="source\Vector2.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\BaseState.h" />

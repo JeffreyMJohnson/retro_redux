@@ -57,7 +57,7 @@
     <ClCompile Include="source\SplashScreenState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="source\TheMath.cpp">
+    <ClCompile Include="source\Vector2.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
