@@ -150,19 +150,23 @@ public:
 	//builds and returns a new identity matrix 
 	static Matrix3& Identity()
 	{
-		Matrix3 m = Matrix3();
-		m.matrix[0][0] = 1;
-		m.matrix[0][1] = 0;
-		m.matrix[0][2] = 0;
+		//check if already initialized
+		if (Matrix3::identityMatrix.matrix[0][0] != 1)
+		{
+			Matrix3::identityMatrix.matrix[0][0] = 1;
+			Matrix3::identityMatrix.matrix[0][1] = 0;
+			Matrix3::identityMatrix.matrix[0][2] = 0;
 
-		m.matrix[1][0] = 0;
-		m.matrix[1][1] = 1;
-		m.matrix[1][2] = 0;
+			Matrix3::identityMatrix.matrix[1][0] = 0;
+			Matrix3::identityMatrix.matrix[1][1] = 1;
+			Matrix3::identityMatrix.matrix[1][2] = 0;
 
-		m.matrix[2][0] = 0;
-		m.matrix[2][1] = 0;
-		m.matrix[2][2] = 1;
-		return m;
+			Matrix3::identityMatrix.matrix[2][0] = 0;
+			Matrix3::identityMatrix.matrix[2][1] = 0;
+			Matrix3::identityMatrix.matrix[2][2] = 1;
+		}
+
+		return Matrix3::identityMatrix;
 	}
 
 	//transposes this matrix
@@ -171,19 +175,24 @@ public:
 	//returns a matrix3 the transpose of this. This matrix does not change
 	Matrix3 GetTranspose();
 
-	Matrix3 operator+(Matrix3& other);
-	Matrix3 operator-(Matrix3& other);
-	Matrix3 operator*(Matrix3& other);
-	Matrix3 operator*(Vector3& other);
+	Matrix3& operator=(const Matrix3& rhs);
 
-	Matrix3& operator+=(Matrix3& other);
-	Matrix3& operator-=(Matrix3& other);
-	Matrix3& operator*=(Matrix3& other);
+	const Matrix3 operator+(Matrix3& rhs);
+	Matrix3 operator-(Matrix3& rhs);
+	Matrix3 operator*(Matrix3& rhs);
+	Matrix3 operator*(Vector3& rhs);
+
+	Matrix3& operator+=(const Matrix3& rhs);
+	Matrix3& operator-=(Matrix3& rhs);
+	Matrix3& operator*=(Matrix3& rhs);
 
 	bool operator==(const Matrix3& rhs);
 	bool operator!=(const Matrix3& rhs);
 
 	float matrix[3][3];
+
+private:
+	static Matrix3 identityMatrix;
 };
 
 #endif

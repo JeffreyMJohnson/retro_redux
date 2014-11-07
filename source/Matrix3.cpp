@@ -9,7 +9,7 @@ Matrix3::Matrix3()
 	{
 		for (int col = 0; col < 3; col++)
 		{
-			matrix[row][col] = 0.0f;
+			matrix[row][col] = 0;
 		}
 	}
 }
@@ -40,6 +40,37 @@ Matrix3::~Matrix3()
 {
 }
 
+Matrix3& Matrix3::operator=(const Matrix3& rhs)
+{
+	for (int row = 0; row < 3; row++)
+	{
+		for (int col = 0; col < 3; col++)
+		{
+			matrix[row][col] = rhs.matrix[row][col];
+		}
+	}
+	return *this;
+}
+
+const Matrix3 Matrix3::operator+(Matrix3& rhs)
+{
+	Matrix3 result = *this;
+	result += rhs;
+	return result;
+}
+
+Matrix3& Matrix3::operator+=(const Matrix3& rhs)
+{
+	for (int row = 0; row < 3; row++)
+	{
+		for (int col = 0; col < 3; col++)
+		{
+			matrix[row][col] += rhs.matrix[row][col];
+		}
+	}
+	return *this;
+}
+
 bool Matrix3::operator==(const Matrix3& rhs)
 {
 	if (this == &rhs)
@@ -60,5 +91,7 @@ bool Matrix3::operator!=(const Matrix3& rhs)
 {
 	return !(*this == rhs);
 }
+
+Matrix3 Matrix3::identityMatrix;
 
 #endif
