@@ -19,10 +19,16 @@ Vector2::~Vector2()
 {
 }
 
-void Vector2::operator=(Vector2& other)
+Vector2& Vector2::operator=(const Vector2& rhs)
 {
-	x = other.x;
-	y = other.y;
+	//check for self assignment
+	if (this != &rhs)
+	{
+		x = rhs.x;
+		y = rhs.y;
+	}
+	return *this;
+
 }
 
 Vector2 Vector2::operator+(const Vector2& other)
@@ -30,10 +36,11 @@ Vector2 Vector2::operator+(const Vector2& other)
 	return Vector2(x + other.x, y + other.y);
 }
 
-void Vector2::operator+=(const Vector2& other)
+Vector2& Vector2::operator+=(const Vector2& rhs)
 {
-	x += other.x;
-	y += other.y;
+	x += rhs.x;
+	y += rhs.y;
+	return *this;
 }
 
 Vector2 Vector2::operator-(const Vector2& other)
