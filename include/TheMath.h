@@ -65,6 +65,15 @@ public:
 
 };
 
+enum MATRIX_MAJOR
+{
+	ROW,
+	COL
+};
+
+//need to declare because of GetVector3() static function's use of Matrix3
+class Matrix3;
+
 class Vector3
 {
 public:
@@ -72,6 +81,8 @@ public:
 	Vector3(float a_x, float a_y, float a_z);
 
 	~Vector3();
+
+	static const Vector3 GetVector3(MATRIX_MAJOR type, int index, const Matrix3& matrix);
 
 	float x, y, z;
 
@@ -121,7 +132,7 @@ public:
 	/*
 	return Vector3 cross product
 	neither this or the given other vector are changed
-	*/	
+	*/
 	Vector3 CrossProduct(const Vector3& other);
 
 	//need LERP function when cover that
@@ -129,11 +140,13 @@ public:
 };
 
 /*
-3X3 Matrix
+Representation of a 3X3 matrix
+NOTE: All operations assume column major layout
 */
 class Matrix3
 {
 public:
+
 	Matrix3();
 	Matrix3(
 		const float m00,
@@ -177,17 +190,17 @@ public:
 
 	Matrix3& operator=(const Matrix3& rhs);
 
-	const Matrix3 operator+(Matrix3& rhs);
-	Matrix3 operator-(Matrix3& rhs);
-	Matrix3 operator*(Matrix3& rhs);
-	Matrix3 operator*(Vector3& rhs);
+	const Matrix3 operator+(const Matrix3& rhs);
+	const Matrix3 operator-(const Matrix3& rhs);
+	const Matrix3 operator*(const Matrix3& rhs);
+	const Vector3 operator*(const Vector3& rhs);
 
 	Matrix3& operator+=(const Matrix3& rhs);
-	Matrix3& operator-=(Matrix3& rhs);
-	Matrix3& operator*=(Matrix3& rhs);
+	Matrix3& operator-=(const Matrix3& rhs);
+	Matrix3& operator*=(const Matrix3& rhs);
 
-	bool operator==(const Matrix3& rhs);
-	bool operator!=(const Matrix3& rhs);
+	const bool operator==(const Matrix3& rhs);
+	const bool operator!=(const Matrix3& rhs);
 
 	float matrix[3][3];
 

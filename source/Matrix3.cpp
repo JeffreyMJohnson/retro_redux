@@ -2,7 +2,6 @@
 #define _MATRIX_3_H
 #include "TheMath.h"
 
-
 Matrix3::Matrix3()
 {
 	for (int row = 0; row < 3; row++)
@@ -40,6 +39,31 @@ Matrix3::~Matrix3()
 {
 }
 
+//transposes this matrix
+Matrix3& Matrix3::Transpose()
+{
+	Matrix3 result;
+	for (int row = 0; row < 3; row++)
+	{
+		//get the row'th column from this object
+		Vector3 v = Vector3::GetVector3(COL, row, *this);
+		//set the temp matrix's row'th row to the vector's values
+		result.matrix[row][0] = v.x;
+		result.matrix[row][1] = v.y;
+		result.matrix[row][2] = v.z;
+	}
+	*this = result;
+	return *this;	
+}
+
+//returns a matrix3 the transpose of this. This matrix does not change
+Matrix3 Matrix3::GetTranspose()
+{
+	Matrix3 result = *this;
+	result.Transpose();
+	return result;
+}
+
 Matrix3& Matrix3::operator=(const Matrix3& rhs)
 {
 	for (int row = 0; row < 3; row++)
@@ -52,10 +76,36 @@ Matrix3& Matrix3::operator=(const Matrix3& rhs)
 	return *this;
 }
 
-const Matrix3 Matrix3::operator+(Matrix3& rhs)
+const Matrix3 Matrix3::operator+(const Matrix3& rhs)
 {
 	Matrix3 result = *this;
 	result += rhs;
+	return result;
+}
+
+const Matrix3 Matrix3::operator-(const Matrix3& rhs)
+{
+	Matrix3 result = *this;
+	result -= rhs;
+	return result;
+}
+
+const Matrix3 Matrix3::operator*(const Matrix3& rhs)
+{
+	Matrix3 result = *this;
+	result *= rhs;
+	return result;
+}
+
+const Vector3 Matrix3::operator*(const Vector3& rhs)
+{
+	Vector3 result;
+	Vector3 row = Vector3::GetVector3(ROW, 0, *this);
+	result.x = row.DotProduct(rhs);
+	row = Vector3::GetVector3(ROW, 1, *this);
+	result.y = row.DotProduct(rhs);
+	row = Vector3::GetVector3(ROW, 2, *this);
+	result.z = row.DotProduct(rhs);
 	return result;
 }
 
@@ -71,7 +121,35 @@ Matrix3& Matrix3::operator+=(const Matrix3& rhs)
 	return *this;
 }
 
-bool Matrix3::operator==(const Matrix3& rhs)
+Matrix3& Matrix3::operator-=(const Matrix3& rhs)
+{
+	for (int row = 0; row < 3; row++)
+	{
+		for (int col = 0; col < 3; col++)
+		{
+			matrix[row][col] -= rhs.matrix[row][col];
+		}
+	}
+	return *this;
+}
+
+Matrix3& Matrix3::operator*=(const Matrix3& rhs)
+{
+	//need to use a temp because use the object during the process and can't modify during.
+	Matrix3 result;
+	for (int row = 0; row < 3; row++)
+	{
+		for (int col = 0; col < 3; col++)
+		{
+			Vector3 rowVector = Vector3::GetVector3(ROW, row, *this);
+			Vector3 colVector = Vector3::GetVector3(COL, col, rhs);
+			result.matrix[row][col] = rowVector.DotProduct(colVector);
+		}
+	}
+	return *this = result;
+}
+
+const bool Matrix3::operator==(const Matrix3& rhs)
 {
 	if (this == &rhs)
 		return true;
@@ -87,7 +165,7 @@ bool Matrix3::operator==(const Matrix3& rhs)
 	return true;
 }
 
-bool Matrix3::operator!=(const Matrix3& rhs)
+const bool Matrix3::operator!=(const Matrix3& rhs)
 {
 	return !(*this == rhs);
 }

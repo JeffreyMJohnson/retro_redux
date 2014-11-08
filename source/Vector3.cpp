@@ -17,6 +17,24 @@ Vector3::Vector3(float a_x, float a_y, float a_z)
 	z = a_z;
 }
 
+Vector3 const Vector3::GetVector3(MATRIX_MAJOR type, int index, const Matrix3& matrix)
+{
+	float x, y, z;
+	if (type == ROW)
+	{
+		x = matrix.matrix[index][0];
+		y = matrix.matrix[index][1];
+		z = matrix.matrix[index][2];
+	}
+	else
+	{
+		x = matrix.matrix[0][index];
+		y = matrix.matrix[1][index];
+		z = matrix.matrix[2][index];
+	}
+	return Vector3(x, y, z);
+}
+
 Vector3::~Vector3()
 {
 }
@@ -94,7 +112,7 @@ returns magnitude of this vector
 */
 float Vector3::Magnitude()
 {
-	return sqrt(pow(x, 2) + pow(y, 2) + pow(z,2));
+	return sqrt(pow(x, 2) + pow(y, 2) + pow(z, 2));
 }
 
 /*
