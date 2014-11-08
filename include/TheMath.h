@@ -165,8 +165,20 @@ public:
 	//builds and returns a new identity matrix 
 	static Matrix3 Identity();
 
-
+	/*
+	returns new rotation matrix
+	*/
 	static Matrix3 SetupRotation(float radians);
+
+	/*
+	returns new scale matrix
+	*/
+	static Matrix3 SetupScale(const Vector2& scale);
+
+	/*
+	return new translation matrix
+	*/
+	static Matrix3 SetupTranslation(Vector2& translation);
 
 	//transposes this matrix
 	Matrix3& Transpose();

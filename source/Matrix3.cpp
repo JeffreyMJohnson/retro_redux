@@ -57,20 +57,40 @@ Matrix3 Matrix3::Identity()
 	return m;
 }
 
+/*
+returns new rotation matrix
+*/
 Matrix3 Matrix3::SetupRotation(float radians)
 {
-	Matrix3 m;
+	Matrix3 m = Matrix3::Identity();
 	m.matrix[0][0] = cos(radians);
 	m.matrix[0][1] = -sin(radians);
-	//matrix[0][2] = 0; by default constructor
 
 	m.matrix[1][0] = sin(radians);
 	m.matrix[1][1] = cos(radians);
-	//matrix[1][2] = 0; by default constructor
+	return m;
+}
 
-	//m.matrix[2][0] = 0; by default constructor
-	//m.matrix[2][1] = 0; by default constructor
-	m.matrix[2][2] = 1;
+/*
+returns new scale matrix
+*/
+Matrix3 Matrix3::SetupScale(const Vector2& scale)
+{
+	Matrix3 m = Matrix3::Identity();
+
+	m.matrix[0][0] = scale.x;
+	m.matrix[1][1] = scale.y;
+	return m;
+}
+
+/*
+return new translation matrix
+*/
+Matrix3 Matrix3::SetupTranslation(Vector2& translation)
+{
+	Matrix3 m = Matrix3::Identity();
+	m.matrix[0][2] = translation.x;
+	m.matrix[1][2] = translation.y;
 	return m;
 }
 
