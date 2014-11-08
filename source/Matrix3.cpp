@@ -39,6 +39,41 @@ Matrix3::~Matrix3()
 {
 }
 
+Matrix3 Matrix3::Identity()
+{
+	Matrix3 m;
+	m.matrix[0][0] = 1;
+	m.matrix[0][1] = 0;
+	m.matrix[0][2] = 0;
+
+	m.matrix[1][0] = 0;
+	m.matrix[1][1] = 1;
+	m.matrix[1][2] = 0;
+
+	m.matrix[2][0] = 0;
+	m.matrix[2][1] = 0;
+	m.matrix[2][2] = 1;
+
+	return m;
+}
+
+Matrix3 Matrix3::SetupRotation(float radians)
+{
+	Matrix3 m;
+	m.matrix[0][0] = cos(radians);
+	m.matrix[0][1] = -sin(radians);
+	//matrix[0][2] = 0; by default constructor
+
+	m.matrix[1][0] = sin(radians);
+	m.matrix[1][1] = cos(radians);
+	//matrix[1][2] = 0; by default constructor
+
+	//m.matrix[2][0] = 0; by default constructor
+	//m.matrix[2][1] = 0; by default constructor
+	m.matrix[2][2] = 1;
+	return m;
+}
+
 //transposes this matrix
 Matrix3& Matrix3::Transpose()
 {
@@ -53,7 +88,7 @@ Matrix3& Matrix3::Transpose()
 		result.matrix[row][2] = v.z;
 	}
 	*this = result;
-	return *this;	
+	return *this;
 }
 
 //returns a matrix3 the transpose of this. This matrix does not change
@@ -170,6 +205,14 @@ const bool Matrix3::operator!=(const Matrix3& rhs)
 	return !(*this == rhs);
 }
 
-Matrix3 Matrix3::identityMatrix;
+std::ostream& operator<<(std::ostream& out, const Matrix3& m)
+{
+	out << "Matrix3\n******************\n";
+	out << "** " << m.matrix[0][0] << "\t" << m.matrix[0][1] << "\t" << m.matrix[0][2] << "  **\n";
+	out << "** " << m.matrix[1][0] << "\t" << m.matrix[1][1] << "\t" << m.matrix[1][2] << "  **\n";
+	out << "** " << m.matrix[2][0] << "\t" << m.matrix[2][1] << "\t" << m.matrix[2][2] << "  **\n";
+	out << "******************\n";
+	return out;
+}
 
 #endif

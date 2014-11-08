@@ -4,6 +4,8 @@
 #define _THE_MATH_H_
 
 #include <math.h>
+#include <iostream>
+#include "Utility.h"
 
 class Vector2
 {
@@ -161,26 +163,10 @@ public:
 	~Matrix3();
 
 	//builds and returns a new identity matrix 
-	static Matrix3& Identity()
-	{
-		//check if already initialized
-		if (Matrix3::identityMatrix.matrix[0][0] != 1)
-		{
-			Matrix3::identityMatrix.matrix[0][0] = 1;
-			Matrix3::identityMatrix.matrix[0][1] = 0;
-			Matrix3::identityMatrix.matrix[0][2] = 0;
+	static Matrix3 Identity();
 
-			Matrix3::identityMatrix.matrix[1][0] = 0;
-			Matrix3::identityMatrix.matrix[1][1] = 1;
-			Matrix3::identityMatrix.matrix[1][2] = 0;
 
-			Matrix3::identityMatrix.matrix[2][0] = 0;
-			Matrix3::identityMatrix.matrix[2][1] = 0;
-			Matrix3::identityMatrix.matrix[2][2] = 1;
-		}
-
-		return Matrix3::identityMatrix;
-	}
+	static Matrix3 SetupRotation(float radians);
 
 	//transposes this matrix
 	Matrix3& Transpose();
@@ -202,10 +188,9 @@ public:
 	const bool operator==(const Matrix3& rhs);
 	const bool operator!=(const Matrix3& rhs);
 
-	float matrix[3][3];
+	friend std::ostream& operator<<(std::ostream& out, const Matrix3& m);
 
-private:
-	static Matrix3 identityMatrix;
+	float matrix[3][3];
 };
 
 #endif
