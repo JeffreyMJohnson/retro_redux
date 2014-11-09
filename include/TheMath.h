@@ -5,7 +5,37 @@
 
 #include <math.h>
 #include <iostream>
-#include "Utility.h"
+
+#define PI 3.14159
+
+class JMath
+{
+public:
+	/*
+	returns the given angle in degrees converted to radians
+	*/
+	static float DegreeToRadians(float angleInDegrees)
+	{
+		return angleInDegrees * (PI / 180);
+	}
+
+	/*
+	returns given angle in radians converted to degrees
+	*/
+	static float RadiansToDegrees(float angleInRadians)
+	{
+		return angleInRadians * (180 / PI);
+	}
+
+	/*
+	returns true if given result is within delta of expected result using
+	formula: (fabs(result - expected) < delta)
+	*/
+	static bool FloatEquals(const float& result, const float& expected, const float delta)
+	{
+		return (fabs(result - expected) < delta);
+	}
+};
 
 class Vector2
 {
@@ -21,7 +51,7 @@ public:
 	Vector2& operator=(const Vector2& rhs);
 
 	Vector2 operator+(const Vector2& other);
-	Vector2& Vector2::operator+=(const Vector2& rhs);
+	Vector2& operator+=(const Vector2& rhs);
 
 	Vector2 operator-(const Vector2& other);
 	void operator-=(const Vector2& other);
@@ -84,6 +114,16 @@ public:
 
 	~Vector3();
 
+	/*this static function returns a Vector3 representing the given index (zero based) row or column of the given matrix parameter depending
+	on the given MATRIX_MAJOR enum type.
+	(e.g. 
+	Matrix3 MyVector(
+					1, 2, 3,
+					4, 5, 6,
+					7, 8, 9);
+	Vector3::GetVector3(ROW, 1, MyMatrix); returns a Vector3 representing the second row of MyMatrix => (4, 5, 6)
+	Vector3::GetVector3(COL, 0, MyMatrix); returns a Vector3 representing the first column of MyMatrix => (1, 4, 7))
+	*/
 	static const Vector3 GetVector3(MATRIX_MAJOR type, int index, const Matrix3& matrix);
 
 	float x, y, z;
@@ -188,10 +228,10 @@ public:
 
 	Matrix3& operator=(const Matrix3& rhs);
 
-	const Matrix3 operator+(const Matrix3& rhs);
-	const Matrix3 operator-(const Matrix3& rhs);
-	const Matrix3 operator*(const Matrix3& rhs);
-	const Vector3 operator*(const Vector3& rhs);
+	Matrix3 operator+(const Matrix3& rhs);
+	Matrix3 operator-(const Matrix3& rhs);
+	Matrix3 operator*(const Matrix3& rhs);
+	Vector3 operator*(const Vector3& rhs);
 
 	Matrix3& operator+=(const Matrix3& rhs);
 	Matrix3& operator-=(const Matrix3& rhs);

@@ -58,7 +58,7 @@ Matrix3 Matrix3::Identity()
 }
 
 /*
-returns new rotation matrix
+returns new rotation matrix from given angle in radians
 */
 Matrix3 Matrix3::SetupRotation(float radians)
 {
@@ -131,28 +131,28 @@ Matrix3& Matrix3::operator=(const Matrix3& rhs)
 	return *this;
 }
 
-const Matrix3 Matrix3::operator+(const Matrix3& rhs)
+Matrix3 Matrix3::operator+(const Matrix3& rhs)
 {
 	Matrix3 result = *this;
 	result += rhs;
 	return result;
 }
 
-const Matrix3 Matrix3::operator-(const Matrix3& rhs)
+Matrix3 Matrix3::operator-(const Matrix3& rhs)
 {
 	Matrix3 result = *this;
 	result -= rhs;
 	return result;
 }
 
-const Matrix3 Matrix3::operator*(const Matrix3& rhs)
+Matrix3 Matrix3::operator*(const Matrix3& rhs)
 {
 	Matrix3 result = *this;
 	result *= rhs;
 	return result;
 }
 
-const Vector3 Matrix3::operator*(const Vector3& rhs)
+Vector3 Matrix3::operator*(const Vector3& rhs)
 {
 	Vector3 result;
 	Vector3 row = Vector3::GetVector3(ROW, 0, *this);
