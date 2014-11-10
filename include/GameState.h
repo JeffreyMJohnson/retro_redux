@@ -55,7 +55,7 @@ public:
 	std::vector<float> enemyColPositions;
 	std::vector<float> enemyRowPositions;
 	
-	Point2d GetEnemyGroupPosition(int colIndex, int rowIndex);
+	Vector2 GetEnemyGroupPosition(int colIndex, int rowIndex);
 
 
 private:

@@ -69,6 +69,8 @@ public:
 	*/
 	bool operator!=(const Vector2& other);
 
+	friend std::ostream& operator<<(std::ostream& out, const Vector2& v);
+
 	//vector math functions
 	/*
 	returns magnitude of this vector
@@ -149,6 +151,8 @@ public:
 	returns false if given other Vector3 is either the same object as this or x and y are equal, else returns true
 	*/
 	bool operator!=(const Vector3& other);
+
+	friend std::ostream& operator<<(std::ostream& out, const Vector3& v);
 
 	//vector math functions
 	/*

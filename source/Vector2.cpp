@@ -85,6 +85,12 @@ bool Vector2::operator!=(const Vector2& other)
 	return !(*this == other);
 }
 
+std::ostream& operator<<(std::ostream& out, const Vector2& v)
+{
+	out << "Vector2 [x: " << v.x << " y: " << v.y << "]";
+	return out;
+}
+
 //vector math functions
 /*
 returns magnitude of this vector

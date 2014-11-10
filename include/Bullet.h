@@ -16,10 +16,10 @@ public:
 
 	Bullet(const char* filePath, float a_width, float a_height);
 	
-	void Init(Point2d a_pos, Point2d a_velocity, float a_speed, float a_radius, int health);
+	void Init(Vector2 a_pos, Point2d a_velocity, float a_speed, float a_radius, int health);
 	
 	//move this bullet to given position with velocity, speed and health
-	void Spawn(Point2d a_pos, Point2d a_velocity, float a_speed, int a_health);
+	void Spawn(Vector2 a_pos, Point2d a_velocity, float a_speed, int a_health);
 
 	void Update(float a_delta);
 	void Draw();

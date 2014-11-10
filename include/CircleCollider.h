@@ -2,17 +2,19 @@
 #ifndef _CIRCLE_COLLIDER_H_
 #define _CIRCLE_COLLIDER_H_
 
-#include "Utility.h"
-#include <math.h>
+#include "TheMath.h"
 
 class CircleCollider
 {
 public:
 	float radius;
-	Point2d center;
+	Vector2 center;
 
 	CircleCollider();
+	CircleCollider(float a_radius, Vector2 a_center);
 	~CircleCollider();
+
+	friend std::ostream& operator<<(std::ostream& out, const CircleCollider& c);
 
 	/*
 	return true if given other parameter position is within distance of this Entity position

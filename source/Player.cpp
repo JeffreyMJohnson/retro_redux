@@ -12,7 +12,7 @@ Player::Player(char* filePath, float a_width, float a_height)
 }
 
 //initialize player with position, velocity, radius (collider),health, speed and alive
-void Player::Init(Point2d a_pos, Point2d a_velocity, float a_radius, int a_health)
+void Player::Init(Vector2 a_pos, Point2d a_velocity, float a_radius, int a_health)
 {
 	position = a_pos;
 	velocity = a_velocity;
@@ -67,7 +67,7 @@ void Player::Input()
 //handle shooting
 void Player::Shoot()
 {
-	BulletManager::SetBullet(PLAYER, Point2d(position.x, position.y + 20.0f), Point2d(0, 1), 300.0f, 1);
+	BulletManager::SetBullet(PLAYER, Vector2(position.x, position.y + 20.0f), Point2d(0, 1), 300.0f, 1);
 }
 
 void Player::Update(float a_delta)
@@ -86,7 +86,7 @@ void Player::Update(float a_delta)
 	else
 	{
 		//move to original position
-		position = Point2d(screenWidth * 0.5f, 100.0f);
+		position = Vector2(screenWidth * 0.5f, 100.0f);
 		MoveSprite(spriteID, position.x, position.y);
 		collider.center = position;
 	}

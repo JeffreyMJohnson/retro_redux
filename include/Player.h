@@ -17,7 +17,7 @@ public:
 	Player(char* filePath, float width, float height);
 
 	//initialize player with position, velocity, radius (collider),health, speed and alive
-	void Init(Point2d a_pos, Point2d a_velocity, float a_radius, int a_health);
+	void Init(Vector2 a_pos, Point2d a_velocity, float a_radius, int a_health);
 
 	//input handling
 	void Input();

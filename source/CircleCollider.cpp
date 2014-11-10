@@ -4,9 +4,21 @@
 CircleCollider::CircleCollider()
 {
 	radius = 0;
-	center = Point2d{ 0, 0 };
+	center = Vector2();
 }
 
+CircleCollider::CircleCollider(float a_radius, Vector2 a_center)
+{
+	radius = a_radius;
+	center = a_center;
+}
+
+std::ostream& operator<<(std::ostream& out, const CircleCollider& c)
+{
+	out << "CircleCollider [radius: " << c.radius << " center: Vector2 [x: " << c.center.x;
+	out << " y: " << c.center.y << "]]";
+	return out;
+}
 
 CircleCollider::~CircleCollider()
 {

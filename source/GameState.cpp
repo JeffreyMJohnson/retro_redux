@@ -61,7 +61,7 @@ void GameState::Initialize()
 	BulletManager::Init();
 
 	player = new Player("./images/player/galaxian_a.png", 46.0f, 69.0f);
-	player->Init(Point2d(screenWidth * 0.5f, 100.0f), Point2d(), 25.0f, 1);
+	player->Init(Vector2(screenWidth * 0.5f, 100.0f), Point2d(), 25.0f, 1);
 
 	gameObjects.push_back(player);
 
@@ -248,9 +248,9 @@ void GameState::Destroy()
 }
 
 //static function to get position in grid
-Point2d GameState::GetEnemyGroupPosition(int colIndex, int rowIndex)
+Vector2 GameState::GetEnemyGroupPosition(int colIndex, int rowIndex)
 {
-	return Point2d(enemyColPositions[colIndex], enemyRowPositions[rowIndex]);
+	return Vector2(enemyColPositions[colIndex], enemyRowPositions[rowIndex]);
 }
 
 //private functions
@@ -293,7 +293,7 @@ void GameState::CreateEnemies()
 		{
 			Enemy* enemy = new Enemy("./images/blue_enemy/blue_enemy_1.png", 35, 25);
 			//initialize position
-			enemy->Init(Point2d(enemyColPositions[colIndex], enemyRowPositions[rowIndex]), Point2d(1, 0), 25, 30, 10.0f, colIndex, rowIndex);
+			enemy->Init(Vector2(enemyColPositions[colIndex], enemyRowPositions[rowIndex]), Point2d(1, 0), 25, 30, 10.0f, colIndex, rowIndex);
 
 			enemy->SetScoreValue(30);
 			enemy->player = dynamic_cast<Player*>(gameObjects[0]);
@@ -310,7 +310,7 @@ void GameState::EnemyLogic(Enemy* enemy, float timeDelta)
 {
 	if (!enemy->isAttacking)
 	{
-		enemy->position = Point2d(enemyColPositions[enemy->colPositionIndex], enemyRowPositions[enemy->rowPositionIndex]);
+		enemy->position = Vector2(enemyColPositions[enemy->colPositionIndex], enemyRowPositions[enemy->rowPositionIndex]);
 	}
 
 	if (enemy->isAttacking && enemy->GetAttackState() != ATTACK)
@@ -640,7 +640,7 @@ void GameState::NewLevelInit()
 			enemy->SetAttackState(MOVE);
 			enemy->SetAttackAngle(0.0f);
 			enemy->attackExitChosen = false;
-			enemy->SetAttackExitPoint(Point2d());
+			enemy->SetAttackExitPoint(Vector2());
 			enemy->attackSlope = 0.0f;
 			enemy->attackYIntercept = 0.0f;
 			enemy->attackVelocity = Point2d();
@@ -652,7 +652,7 @@ void GameState::NewLevelInit()
 				enemyY -= enemy->GetHeight();
 			}
 
-			enemy->position = Point2d(enemyX, enemyY);
+			enemy->position = Vector2(enemyX, enemyY);
 
 			//increment next enemy's x position
 			enemyX += enemy->GetWidth() + 10.0f;

@@ -27,7 +27,7 @@ void Entity::SetY(float y)
 	position.y = y;
 }
 
-Point2d Entity::GetPosition()
+Vector2 Entity::GetPosition()
 {
 	return position;
 }

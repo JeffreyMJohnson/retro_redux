@@ -68,7 +68,7 @@ public:
 	bool operator!=(Enemy& other);
 
 	//Initialize enemy with position, velocity, collider radius, health, speed, colIndex, rowIndex and alive
-	void Init(Point2d a_pos, Point2d a_velocity, float a_radius, int a_health, float a_speed, int a_colIndex, int a_rowIndex);
+	void Init(Vector2 a_pos, Point2d a_velocity, float a_radius, int a_health, float a_speed, int a_colIndex, int a_rowIndex);
 
 	//handle shooting
 	void Shoot();
@@ -104,8 +104,8 @@ public:
 	void SetAttackRadius(float a_radius);
 	float GetAttackRadius();
 
-	void SetAttackExitPoint(Point2d a_point);
-	Point2d GetAttackExitPoint();
+	void SetAttackExitPoint(Vector2 a_point);
+	Vector2 GetAttackExitPoint();
 
 	void SetAttackState(attackStates a_state);
 	attackStates GetAttackState();
@@ -120,14 +120,14 @@ private:
 	int scoreValue;
 	float attackAngle;
 	float attackRadius;
-	Point2d attackExitPoint;
+	Vector2 attackExitPoint;
 	attackStates attackState;
 	float shootTimer;
 	float shootMaxTime;
 
 
 
-	float GetSlopeOfLine(Point2d point1, Point2d point2);
+	float GetSlopeOfLine(Vector2 point1, Vector2 point2);
 
 
 	/*

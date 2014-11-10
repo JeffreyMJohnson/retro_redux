@@ -17,7 +17,7 @@ Enemy::Enemy(const char* filePath, float a_width, float a_height)
 	attackAngle = Helper::DegreeToRadians(90.0f);
 	attackRadius = 30.0f;
 	attackState = MOVE;
-	attackExitPoint = Point2d();
+	attackExitPoint = Vector2();
 	attackExitChosen = false;
 	attackSlope = 0.0f;
 	attackYIntercept = 0.0f;
@@ -49,7 +49,7 @@ bool Enemy::operator!=(Enemy& other)
 
 //Initialize enemy with position, velocity, collider radius, health, speed, colIndex, rowIndex and alive
 //void Enemy::Init(Point2d a_pos, Point2d a_velocity, float a_radius, int a_health, float a_speed)
-void Enemy::Init(Point2d a_pos, Point2d a_velocity, float a_radius, int a_health, float a_speed, int a_colIndex, int a_rowIndex)
+void Enemy::Init(Vector2 a_pos, Point2d a_velocity, float a_radius, int a_health, float a_speed, int a_colIndex, int a_rowIndex)
 {
 	position = a_pos;
 	velocity = a_velocity;
@@ -113,20 +113,20 @@ void Enemy::Attack(float timeDelta, GameState* gameState)
 		y = a + d * sin(theta)
 		*/
 		//attackAngle is in radians convert to be in degrees
-		if (fabs((attackAngle - Helper::DegreeToRadians(270.0f))) > epsilon)
+		if (fabs((attackAngle - JMath::DegreeToRadians(270.0f))) > epsilon)
 		{
-			Point2d returnPosition = gameState->GetEnemyGroupPosition(colPositionIndex, rowPositionIndex);
+			Vector2 returnPosition = gameState->GetEnemyGroupPosition(colPositionIndex, rowPositionIndex);
 			float x = (returnPosition.x + (attackRadius * cos(attackAngle)));
 			float y = (returnPosition.y + (attackRadius * sin(attackAngle)));
 
 			
-			attackAngle = attackAngle + Helper::DegreeToRadians(.05f) * attackVelocity.x * attackSpeed;
-			if (Helper::RadiansToDegrees(attackAngle) <= 0)
+			attackAngle = attackAngle + JMath::DegreeToRadians(.05f) * attackVelocity.x * attackSpeed;
+			if (JMath::RadiansToDegrees(attackAngle) <= 0)
 			{
-				attackAngle = Helper::DegreeToRadians(360.0f);
+				attackAngle = JMath::DegreeToRadians(360.0f);
 			}
 
-			position = Point2d(x, y);
+			position = Vector2(x, y);
 		}
 		else
 		{
@@ -152,7 +152,7 @@ void Enemy::Attack(float timeDelta, GameState* gameState)
 			{
 				attackVelocity = Point2d(-1, 1);
 			}
-			attackExitPoint = Point2d(player->position.x + 100.0f * attackVelocity.x, 0);
+			attackExitPoint = Vector2(player->position.x + 100.0f * attackVelocity.x, 0);
 			attackExitChosen = true;
 
 			//slope formula -> m = (y1 -y2) / (x1 - x2)
@@ -183,14 +183,14 @@ void Enemy::Attack(float timeDelta, GameState* gameState)
 		{
 			float x = position.x + attackSpeed * attackVelocity.x * timeDelta;
 			float y = (attackSlope * x) + attackYIntercept;
-			position = Point2d(x, y);
+			position = Vector2(x, y);
 		}
 		else
 		{
 			attackExitChosen = false;
 
 			//set enemy x to original position and y to screen height
-			position = Point2d(gameState->GetEnemyGroupPosition(colPositionIndex, rowPositionIndex).x, screenHeight);
+			position = Vector2(gameState->GetEnemyGroupPosition(colPositionIndex, rowPositionIndex).x, screenHeight);
 			attackState = RETURN;
 
 		}
@@ -200,7 +200,7 @@ void Enemy::Attack(float timeDelta, GameState* gameState)
 		attackVelocity = Point2d(attackVelocity.x, -1);
 		if (position.y > gameState->GetEnemyGroupPosition(colPositionIndex, rowPositionIndex).y)
 		{
-			position = Point2d(gameState->GetEnemyGroupPosition(colPositionIndex, rowPositionIndex).x, 
+			position = Vector2(gameState->GetEnemyGroupPosition(colPositionIndex, rowPositionIndex).x, 
 						position.y + (attackSpeed * attackVelocity.y * timeDelta));
 		}
 		else
@@ -210,7 +210,7 @@ void Enemy::Attack(float timeDelta, GameState* gameState)
 			attackState = MOVE;
 			attackAngle = 0.0f;
 			attackExitChosen = false;
-			attackExitPoint = Point2d();
+			attackExitPoint = Vector2();
 			attackSlope = 0.0f;
 			attackYIntercept = 0.0f;
 			attackVelocity = Point2d();
@@ -222,7 +222,7 @@ void Enemy::Attack(float timeDelta, GameState* gameState)
 	}
 }
 
-float Enemy::GetSlopeOfLine(Point2d point1, Point2d point2)
+float Enemy::GetSlopeOfLine(Vector2 point1, Vector2 point2)
 {
 	return (point1.y - point2.y) / (point1.x - point2.x);
 
@@ -325,12 +325,12 @@ attackStates Enemy::GetAttackState()
 	return attackState;
 }
 
-void Enemy::SetAttackExitPoint(Point2d a_point)
+void Enemy::SetAttackExitPoint(Vector2 a_point)
 {
 	attackExitPoint = a_point;
 }
 
-Point2d Enemy::GetAttackExitPoint()
+Vector2 Enemy::GetAttackExitPoint()
 {
 	return attackExitPoint;
 }

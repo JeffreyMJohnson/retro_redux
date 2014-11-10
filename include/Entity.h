@@ -1,6 +1,7 @@
 #pragma once
 #ifndef _ENTITY_H_
 #define _ENTITY_H_
+#include "TheMath.h"
 #include "Utility.h"
 #include "CircleCollider.h"
 
@@ -14,8 +15,10 @@ public:
 	unsigned int spriteID;
 	float width;
 	float height;
-	Point2d position;
 	Point2d velocity;
+	Vector2 position;
+	//speed with direction. could refactor to speed scalar (magnitude) and unit Vector direction.
+	//Vector2 velocity;
 	float speed;
 	bool alive;
 
@@ -26,7 +29,7 @@ public:
 	void SetPosition(float a_x, float a_y);
 	void SetX(float x);
 	void SetY(float y);
-	Point2d GetPosition();
+	Vector2 GetPosition();
 
 	virtual void Update(float a_delta) = 0;
 	virtual void Draw() = 0;
