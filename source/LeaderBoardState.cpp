@@ -40,7 +40,8 @@ void LeaderBoardState::Draw()
 	for (std::list<int>::iterator it = scores.begin(); it != scores.end(); it++)
 	{
 		char s[10];
-		sprintf(s, "%5d", *it);
+		//sprintf(s, "%5d", *it);
+		sprintf_s(s, "%5d", *it);
 		DrawString(s, xPos, yPos);
 		yPos -= 35;
 	}

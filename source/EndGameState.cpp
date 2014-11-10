@@ -33,7 +33,7 @@ void EndGameState::Draw()
 
 	DrawString("SCORE", screenWidth * .25, screenHeight * .50);
 	char score[10];
-	sprintf(score, "%05d", BaseState::score);
+	sprintf_s(score, "%05d", BaseState::score);
 	DrawString(score, screenWidth *0.5 + 50, screenHeight * .50);
 
 	DrawString("PRESS <ESC> TO RETURN TO MAIN MENU", screenWidth * .5 - 280, screenHeight * .1);

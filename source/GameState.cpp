@@ -601,11 +601,11 @@ void GameState::DrawUI()
 {
 
 	DrawString(scoreLabel, scorePos.x, scorePos.y);
-	sprintf(scoreAsString, "%05d", BaseState::score);
+	sprintf_s(scoreAsString, "%05d", BaseState::score);
 	DrawString(scoreAsString, scorePos.x, scorePos.y - 25, SColour(255, 0, 0, 255));
 
 	DrawString(highScoreLabel, highScorePos.x, highScorePos.y);
-	sprintf(HighScoreAsString, "%05d", highScore);
+	sprintf_s(HighScoreAsString, "%05d", highScore);
 	DrawString(HighScoreAsString, screenWidth * .5f, highScorePos.y - 25, SColour(255, 0, 0, 255));
 
 	//player lives
@@ -666,6 +666,6 @@ void GameState::NewLevelInit()
 char* GameState::ScoreToString(int a_score)
 {
 	char result[20];
-	sprintf(result, "%05d", a_score);
+	sprintf_s(result, "%05d", a_score);
 	return result;
 }
