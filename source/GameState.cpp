@@ -242,7 +242,7 @@ void GameState::Destroy()
 {
 	for (auto object : gameObjects)
 	{
-		DestroySprite(object->GetSpriteID());
+		DestroySprite(object->spriteID);
 		delete object;
 	}
 }
@@ -404,8 +404,8 @@ void GameState::ChooseAttackers()
 		{
 			Enemy* enemy = dynamic_cast<Enemy*>(entity);
 			//if direction is left (1) then use the min column else use the max
-			if ((attackVelocity.x == 1 && Helper::FloatEquals(enemy->position.x, enemyColMinX, delta) ||
-				(attackVelocity.x == -1 && Helper::FloatEquals(enemy->position.x, enemyColMaxX, delta))))
+			if ((attackVelocity.x == 1 && JMath::FloatEquals(enemy->position.x, enemyColMinX, delta) ||
+				(attackVelocity.x == -1 && JMath::FloatEquals(enemy->position.x, enemyColMaxX, delta))))
 			{
 				enemy->isAttacking = true;
 				enemy->attackVelocity = attackVelocity;
@@ -515,13 +515,13 @@ void GameState::GetEnemyColX(float& minX, float& maxX)
 		if (dynamic_cast<Enemy*>(object) != 0)
 		{
 			Enemy* enemy = dynamic_cast<Enemy*>(object);
-			if (enemy->GetPosition().x > maxX)
+			if (enemy->position.x)
 			{
-				maxX = enemy->GetPosition().x;
+				maxX = enemy->position.x;
 			}
-			if (enemy->GetPosition().x < minX)
+			if (enemy->position.x < minX)
 			{
-				minX = enemy->GetPosition().x;
+				minX = enemy->position.x;
 			}
 		}
 	}
@@ -571,7 +571,7 @@ void GameState::GetColExtremes(float& minX, float& maxX)
 
 		if (dynamic_cast<Enemy*>(object) != 0)
 		{
-			float enemyX = dynamic_cast<Enemy*>(object)->GetPosition().x;
+			float enemyX = dynamic_cast<Enemy*>(object)->position.x;
 			if (enemyX < minX)
 			{
 				minX = enemyX;
@@ -649,13 +649,13 @@ void GameState::NewLevelInit()
 			if (enemyX > screenWidth * 0.8f)
 			{
 				enemyX = screenWidth * 0.2f;
-				enemyY -= enemy->GetHeight();
+				enemyY -= enemy->height;
 			}
 
 			enemy->position = Vector2(enemyX, enemyY);
 
 			//increment next enemy's x position
-			enemyX += enemy->GetWidth() + 10.0f;
+			enemyX += enemy->width + 10.0f;
 		}
 	}
 

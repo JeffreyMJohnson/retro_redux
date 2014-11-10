@@ -14,7 +14,7 @@ Enemy::Enemy(const char* filePath, float a_width, float a_height)
 	activeEnemyCount++;
 	isAttacking = false;
 	//in radians so convert!
-	attackAngle = Helper::DegreeToRadians(90.0f);
+	attackAngle =JMath::DegreeToRadians(90.0f);
 	attackRadius = 30.0f;
 	attackState = MOVE;
 	attackExitPoint = Vector2();
@@ -143,7 +143,7 @@ void Enemy::Attack(float timeDelta, GameState* gameState)
 
 		if (!attackExitChosen)
 		{
-			if (position.x < player->GetPosition().x)
+			if (position.x < player->position.x)
 			{
 				//pick to right of player
 				attackVelocity = Point2d(1, 1);

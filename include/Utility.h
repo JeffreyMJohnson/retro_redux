@@ -39,33 +39,4 @@ struct Point2d
 		return !(*this == other);
 	}
 };
-
-class Helper
-{
-public:
-	/*
-	returns the given angle in degrees converted to radians
-	*/
-	static float DegreeToRadians(float angleInDegrees)
-	{
-		return angleInDegrees * (PI / 180);
-	}
-
-	/*
-	returns given angle in radians converted to degrees
-	*/
-	static float RadiansToDegrees(float angleInRadians)
-	{
-		return angleInRadians * (180 / PI);
-	}
-
-	/*
-	returns true if given result is within delta of expected result using 
-	formula: (fabs(result - expected) < delta)
-	*/
-	static bool FloatEquals(const float& result, const float& expected, const float delta)
-	{
-		return (fabs(result - expected) < delta);
-	}
-};
 #endif
