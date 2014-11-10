@@ -6,10 +6,10 @@ Bullet::Bullet(const char* filePath, float a_width, float a_height)
 	height = a_height;
 	spriteID = CreateSprite(filePath, a_width, a_height, true);
 	alive = false;
-	Init(Vector2( 0, 0 ), Point2d{ 0, 0 }, 100, 15, 1);
+	Init(Vector2(0, 0), Vector2(0, 0), 100, 15, 1);
 }
 
-void Bullet::Init(Vector2 a_pos, Point2d a_velocity, float a_speed, float a_radius, int a_health)
+void Bullet::Init(Vector2 a_pos, Vector2 a_velocity, float a_speed, float a_radius, int a_health)
 {
 	position = a_pos;
 	velocity = a_velocity;
@@ -19,7 +19,7 @@ void Bullet::Init(Vector2 a_pos, Point2d a_velocity, float a_speed, float a_radi
 }
 
 //move this bullet to given position with velocity, speed and health
-void Bullet::Spawn(Vector2 a_pos, Point2d a_velocity, float a_speed, int a_health)
+void Bullet::Spawn(Vector2 a_pos, Vector2 a_velocity, float a_speed, int a_health)
 {
 	position = a_pos;
 	velocity = a_velocity;

@@ -47,7 +47,7 @@ public:
 	//these need to be hidden and have an easy way to increment the line
 	float attackSlope;
 	float attackYIntercept;
-	Point2d attackVelocity;
+	Vector2 attackVelocity;
 
 	int colPositionIndex;
 	int rowPositionIndex;
@@ -68,7 +68,7 @@ public:
 	bool operator!=(Enemy& other);
 
 	//Initialize enemy with position, velocity, collider radius, health, speed, colIndex, rowIndex and alive
-	void Init(Vector2 a_pos, Point2d a_velocity, float a_radius, int a_health, float a_speed, int a_colIndex, int a_rowIndex);
+	void Init(Vector2 a_pos, Vector2 a_velocity, float a_radius, int a_health, float a_speed, int a_colIndex, int a_rowIndex);
 
 	//handle shooting
 	void Shoot();
@@ -95,8 +95,8 @@ public:
 	void SetScoreValue(int a_scoreValue);
 	int GetScoreValue();
 
-	void SetOriginalPos(Point2d a_point);
-	Point2d GetreturnPosition();
+	void SetOriginalPos(Vector2 a_point);
+	Vector2 GetreturnPosition();
 
 	void SetAttackAngle(float a_angle);
 	float GetAttackAngle();

@@ -19,13 +19,13 @@ public:
 			for (int i = 0; i < 100; i++)
 			{
 				Bullet* enemyBullet = new Bullet("./images/bullet.png", 5, 15);
-				enemyBullet->Init(Vector2(), Point2d(0, -1), 10.0f, 1, 1);
+				enemyBullet->Init(Vector2(), Vector2(0, -1), 10.0f, 1, 1);
 				enemyBullets.emplace_back(enemyBullet);
 				//enemyBullets.emplace_back(new Bullet("./images/bullet.png", 5, 15));
 			}
 
 			playerBullet = new Bullet("./images/bullet.png", 5, 15);
-			playerBullet->Init(Vector2(), Point2d(0, 1), 0, 1, 1);
+			playerBullet->Init(Vector2(), Vector2(0, 1), 0, 1, 1);
 		}
 		else
 		{
@@ -33,7 +33,7 @@ public:
 		}
 	}
 
-	static bool SetBullet(TYPE type, Vector2 a_pos, Point2d a_velocity, float a_speed, int a_health)
+	static bool SetBullet(TYPE type, Vector2 a_pos, Vector2 a_velocity, float a_speed, int a_health)
 	{
 
 		if (type == ENEMY)

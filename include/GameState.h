@@ -48,7 +48,7 @@ public:
 	Player* player;
 	float restartTimer;
 	float currentRestartTime;
-	Point2d enemyGroupVelocity;
+	Vector2 enemyGroupVelocity;
 	float enemyGroupSpeed;
 	bool gameOver;
 
@@ -150,7 +150,7 @@ private:
 	float attackTimer;
 	float enemyColMinX;
 	float enemyColMaxX;
-	Point2d attackVelocity;
+	Vector2 attackVelocity;
 
 	std::vector<Entity*> gameObjects;
 	std::vector<Enemy*> attackingEnemies;
@@ -164,9 +164,9 @@ private:
 
 
 	//position of score and label
-	Point2d scorePos;
+	Vector2 scorePos;
 	//position  of highscore and label
-	Point2d highScorePos;
+	Vector2 highScorePos;
 
 	int highScore;
 

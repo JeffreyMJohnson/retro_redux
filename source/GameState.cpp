@@ -19,8 +19,8 @@ GameState::GameState()
 	gameOver = false;
 	scoreLabel = "1UP";
 	highScoreLabel = "HIGH SCORE";
-	scorePos = Point2d(screenWidth * .1f, screenHeight);
-	highScorePos = Point2d(screenWidth * .5f - 75.0f, screenHeight);
+	scorePos = Vector2(screenWidth * .1f, screenHeight);
+	highScorePos = Vector2(screenWidth * .5f - 75.0f, screenHeight);
 	BaseState::score = 0;
 
 	playerLifeTextureID = CreateSprite("./images/misc/user_life_sprite.png", 35.0f, 41.0f, true);
@@ -32,12 +32,12 @@ GameState::GameState()
 	player = nullptr;
 
 	//need to be a positive y for first stage of attack
-	attackVelocity = Point2d(-1, 1);
+	attackVelocity = Vector2(-1, 1);
 	attackingEnemy = nullptr;
 
 	restartTimer = 5.0f;
 	currentRestartTime = 0.0f;
-	enemyGroupVelocity = Point2d(1, 0);
+	enemyGroupVelocity = Vector2(1, 0);
 
 
 	enemyGroupSpeed = 20.0f;
@@ -61,7 +61,7 @@ void GameState::Initialize()
 	BulletManager::Init();
 
 	player = new Player("./images/player/galaxian_a.png", 46.0f, 69.0f);
-	player->Init(Vector2(screenWidth * 0.5f, 100.0f), Point2d(), 25.0f, 1);
+	player->Init(Vector2(screenWidth * 0.5f, 100.0f), Vector2(), 25.0f, 1);
 
 	gameObjects.push_back(player);
 
@@ -293,7 +293,7 @@ void GameState::CreateEnemies()
 		{
 			Enemy* enemy = new Enemy("./images/blue_enemy/blue_enemy_1.png", 35, 25);
 			//initialize position
-			enemy->Init(Vector2(enemyColPositions[colIndex], enemyRowPositions[rowIndex]), Point2d(1, 0), 25, 30, 10.0f, colIndex, rowIndex);
+			enemy->Init(Vector2(enemyColPositions[colIndex], enemyRowPositions[rowIndex]), Vector2(1, 0), 25, 30, 10.0f, colIndex, rowIndex);
 
 			enemy->SetScoreValue(30);
 			enemy->player = dynamic_cast<Player*>(gameObjects[0]);
@@ -589,11 +589,11 @@ void GameState::GetAttackDirection()
 	int i = rand() % 2; //0 or 1
 	if (i == 0)
 	{
-		attackVelocity = Point2d(-1, 1); //right circle
+		attackVelocity = Vector2(-1, 1); //right circle
 	}
 	else
 	{
-		attackVelocity = Point2d(1, 1);//left circle
+		attackVelocity = Vector2(1, 1);//left circle
 	}
 }
 
@@ -643,7 +643,7 @@ void GameState::NewLevelInit()
 			enemy->SetAttackExitPoint(Vector2());
 			enemy->attackSlope = 0.0f;
 			enemy->attackYIntercept = 0.0f;
-			enemy->attackVelocity = Point2d();
+			enemy->attackVelocity = Vector2();
 
 			//check if need new line of enemy
 			if (enemyX > screenWidth * 0.8f)

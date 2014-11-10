@@ -15,7 +15,7 @@ public:
 	unsigned int spriteID;
 	float width;
 	float height;
-	Point2d velocity;
+	Vector2 velocity;
 	Vector2 position;
 	//speed with direction. could refactor to speed scalar (magnitude) and unit Vector direction.
 	//Vector2 velocity;

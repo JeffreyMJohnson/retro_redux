@@ -21,7 +21,7 @@ Enemy::Enemy(const char* filePath, float a_width, float a_height)
 	attackExitChosen = false;
 	attackSlope = 0.0f;
 	attackYIntercept = 0.0f;
-	attackVelocity = Point2d();
+	attackVelocity = Vector2();
 
 
 	attackSpeed = 40.0f;
@@ -48,8 +48,7 @@ bool Enemy::operator!=(Enemy& other)
 }
 
 //Initialize enemy with position, velocity, collider radius, health, speed, colIndex, rowIndex and alive
-//void Enemy::Init(Point2d a_pos, Point2d a_velocity, float a_radius, int a_health, float a_speed)
-void Enemy::Init(Vector2 a_pos, Point2d a_velocity, float a_radius, int a_health, float a_speed, int a_colIndex, int a_rowIndex)
+void Enemy::Init(Vector2 a_pos, Vector2 a_velocity, float a_radius, int a_health, float a_speed, int a_colIndex, int a_rowIndex)
 {
 	position = a_pos;
 	velocity = a_velocity;
@@ -133,7 +132,7 @@ void Enemy::Attack(float timeDelta, GameState* gameState)
 			attackAngle = 90.0f;
 			attackState = ATTACK;
 			//change velocity to downward y for return phase
-			attackVelocity = Point2d(attackVelocity.x, -1);
+			attackVelocity = Vector2(attackVelocity.x, -1);
 		}
 		break;
 	case ATTACK:
@@ -146,11 +145,11 @@ void Enemy::Attack(float timeDelta, GameState* gameState)
 			if (position.x < player->position.x)
 			{
 				//pick to right of player
-				attackVelocity = Point2d(1, 1);
+				attackVelocity = Vector2(1, 1);
 			}
 			else//enemy to right or equal of player so go left
 			{
-				attackVelocity = Point2d(-1, 1);
+				attackVelocity = Vector2(-1, 1);
 			}
 			attackExitPoint = Vector2(player->position.x + 100.0f * attackVelocity.x, 0);
 			attackExitChosen = true;
@@ -168,7 +167,7 @@ void Enemy::Attack(float timeDelta, GameState* gameState)
 
 		if (shootTimer <= 0)
 		{
-			BulletManager::SetBullet(ENEMY, position, Point2d(0, -1), 300.0f, 1);
+			BulletManager::SetBullet(ENEMY, position, Vector2(0, -1), 300.0f, 1);
 			shootTimer = shootMaxTime;
 
 		}
@@ -197,7 +196,7 @@ void Enemy::Attack(float timeDelta, GameState* gameState)
 
 		break;
 	case RETURN:
-		attackVelocity = Point2d(attackVelocity.x, -1);
+		attackVelocity = Vector2(attackVelocity.x, -1);
 		if (position.y > gameState->GetEnemyGroupPosition(colPositionIndex, rowPositionIndex).y)
 		{
 			position = Vector2(gameState->GetEnemyGroupPosition(colPositionIndex, rowPositionIndex).x, 
@@ -213,7 +212,7 @@ void Enemy::Attack(float timeDelta, GameState* gameState)
 			attackExitPoint = Vector2();
 			attackSlope = 0.0f;
 			attackYIntercept = 0.0f;
-			attackVelocity = Point2d();
+			attackVelocity = Vector2();
 		}
 
 

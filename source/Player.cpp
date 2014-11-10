@@ -12,7 +12,7 @@ Player::Player(char* filePath, float a_width, float a_height)
 }
 
 //initialize player with position, velocity, radius (collider),health, speed and alive
-void Player::Init(Vector2 a_pos, Point2d a_velocity, float a_radius, int a_health)
+void Player::Init(Vector2 a_pos, Vector2 a_velocity, float a_radius, int a_health)
 {
 	position = a_pos;
 	velocity = a_velocity;
@@ -28,7 +28,7 @@ void Player::Init(Vector2 a_pos, Point2d a_velocity, float a_radius, int a_healt
 void Player::Input()
 {
 	//start with 0 velocity
-	velocity = Point2d();
+	velocity = Vector2();
 
 	if (IsKeyDown(GLFW_KEY_A))
 	{
@@ -67,7 +67,7 @@ void Player::Input()
 //handle shooting
 void Player::Shoot()
 {
-	BulletManager::SetBullet(PLAYER, Vector2(position.x, position.y + 20.0f), Point2d(0, 1), 300.0f, 1);
+	BulletManager::SetBullet(PLAYER, Vector2(position.x, position.y + 20.0f), Vector2(0, 1), 300.0f, 1);
 }
 
 void Player::Update(float a_delta)
