@@ -59,6 +59,11 @@ Vector2 Vector2::operator*(const float scalar)
 	return Vector2(x * scalar, y * scalar);
 }
 
+//Vector2 operator*(const float scalar, const Vector2& vector)
+//{
+//	return scalar * vector;
+//}
+
 void Vector2::operator*=(const float scalar)
 {
 	x *= scalar;
@@ -132,6 +137,16 @@ float Vector2::DotProduct(const Vector2& other)
 Vector2 Vector2::GetPerp()
 {
 	return Vector2(this->y, -this->x);
+}
+
+
+/*
+Returns new vector linear interpolated the given percent of the given vectors
+i.e. (start + percent * (end - start))
+*/
+Vector2 Vector2::LERP(Vector2& start, Vector2& end, float percent)
+{
+	return (start + (end - start) * percent);
 }
 
 #endif

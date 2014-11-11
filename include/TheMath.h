@@ -95,7 +95,11 @@ public:
 	//return Vector2 perpendicular to this one
 	Vector2 GetPerp();
 
-	//need LERP function when cover that
+	/*
+	Returns new vector linear interpolated the given percent of the given vectors
+	i.e. (start + percent * (end - start))
+	*/
+	static Vector2 LERP(Vector2& start, Vector2& end, float percent);
 
 };
 
