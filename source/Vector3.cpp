@@ -17,34 +17,6 @@ Vector3::Vector3(float a_x, float a_y, float a_z)
 	z = a_z;
 }
 
-/*this static function returns a Vector3 representing the given index (zero based) row or column of the given matrix parameter depending
-on the given MATRIX_MAJOR enum type.
-(e.g.
-Matrix3 MyVector(
-1, 2, 3,
-4, 5, 6,
-7, 8, 9);
-Vector3::GetVector3(ROW, 1, MyMatrix); returns a Vector3 representing the second row of MyMatrix => (4, 5, 6)
-Vector3::GetVector3(COL, 0, MyMatrix); returns a Vector3 representing the first column of MyMatrix => (1, 4, 7))
-*/
-const Vector3 Vector3::GetVector3(MATRIX_MAJOR type, int index, const Matrix3& matrix)
-{
-	float x, y, z;
-	if (type == ROW)
-	{
-		x = matrix.matrix[index][0];
-		y = matrix.matrix[index][1];
-		z = matrix.matrix[index][2];
-	}
-	else
-	{
-		x = matrix.matrix[0][index];
-		y = matrix.matrix[1][index];
-		z = matrix.matrix[2][index];
-	}
-	return Vector3(x, y, z);
-}
-
 Vector3::~Vector3()
 {
 }

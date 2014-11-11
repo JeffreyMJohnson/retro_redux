@@ -94,6 +94,34 @@ Matrix3 Matrix3::SetupTranslation(Vector2& translation)
 	return m;
 }
 
+/*this static function returns a Vector3 representing the given index (zero based) row or column of the given matrix parameter depending
+on the given MATRIX_MAJOR enum type.
+(e.g.
+Matrix3 MyVector(
+1, 2, 3,
+4, 5, 6,
+7, 8, 9);
+Matrix3::GetVector3(ROW, 1, MyMatrix); returns a Vector3 representing the second row of MyMatrix => (4, 5, 6)
+Matrix3::GetVector3(COL, 0, MyMatrix); returns a Vector3 representing the first column of MyMatrix => (1, 4, 7))
+*/
+const Vector3 Matrix3::GetVector3(MATRIX_MAJOR type, int index, const Matrix3& matrix)
+{
+	float x, y, z;
+	if (type == ROW)
+	{
+		x = matrix.matrix[index][0];
+		y = matrix.matrix[index][1];
+		z = matrix.matrix[index][2];
+	}
+	else
+	{
+		x = matrix.matrix[0][index];
+		y = matrix.matrix[1][index];
+		z = matrix.matrix[2][index];
+	}
+	return Vector3(x, y, z);
+}
+
 //transposes this matrix
 Matrix3& Matrix3::Transpose()
 {
@@ -101,7 +129,7 @@ Matrix3& Matrix3::Transpose()
 	for (int row = 0; row < 3; row++)
 	{
 		//get the row'th column from this object
-		Vector3 v = Vector3::GetVector3(COL, row, *this);
+		Vector3 v = Matrix3::GetVector3(COL, row, *this);
 		//set the temp matrix's row'th row to the vector's values
 		result.matrix[row][0] = v.x;
 		result.matrix[row][1] = v.y;
@@ -155,11 +183,11 @@ Matrix3 Matrix3::operator*(const Matrix3& rhs)
 Vector3 Matrix3::operator*(const Vector3& rhs)
 {
 	Vector3 result;
-	Vector3 row = Vector3::GetVector3(ROW, 0, *this);
+	Vector3 row = Matrix3::GetVector3(ROW, 0, *this);
 	result.x = row.DotProduct(rhs);
-	row = Vector3::GetVector3(ROW, 1, *this);
+	row = Matrix3::GetVector3(ROW, 1, *this);
 	result.y = row.DotProduct(rhs);
-	row = Vector3::GetVector3(ROW, 2, *this);
+	row = Matrix3::GetVector3(ROW, 2, *this);
 	result.z = row.DotProduct(rhs);
 	return result;
 }
@@ -196,8 +224,8 @@ Matrix3& Matrix3::operator*=(const Matrix3& rhs)
 	{
 		for (int col = 0; col < 3; col++)
 		{
-			Vector3 rowVector = Vector3::GetVector3(ROW, row, *this);
-			Vector3 colVector = Vector3::GetVector3(COL, col, rhs);
+			Vector3 rowVector = Matrix3::GetVector3(ROW, row, *this);
+			Vector3 colVector = Matrix3::GetVector3(COL, col, rhs);
 			result.matrix[row][col] = rowVector.DotProduct(colVector);
 		}
 	}
