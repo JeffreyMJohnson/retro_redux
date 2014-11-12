@@ -123,13 +123,13 @@ public:
 	float x, y, z;
 
 	//operator overloads
-	void operator=(const Vector3& other);
+	Vector3& operator=(const Vector3& other);
 
 	Vector3 operator+(const Vector3& other);
-	void operator+=(const Vector3& other);
+	Vector3& operator+=(const Vector3& other);
 
 	Vector3 operator-(const Vector3& other);
-	void operator-=(const Vector3& other);
+	Vector3& operator-=(const Vector3& other);
 
 	Vector3 operator*(const float scalar);
 	void operator*=(const float scalar);

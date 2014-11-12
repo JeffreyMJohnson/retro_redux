@@ -22,11 +22,12 @@ Vector3::~Vector3()
 }
 
 //operator overloads
-void Vector3::operator=(const Vector3& other)
+Vector3& Vector3::operator=(const Vector3& other)
 {
 	x = other.x;
 	y = other.y;
 	z = other.z;
+	return *this;
 }
 
 Vector3 Vector3::operator+(const Vector3& other)
@@ -34,11 +35,12 @@ Vector3 Vector3::operator+(const Vector3& other)
 	return Vector3(x + other.x, y + other.y, z + other.z);
 }
 
-void Vector3::operator+=(const Vector3& other)
+Vector3& Vector3::operator+=(const Vector3& other)
 {
 	x += other.x;
 	y += other.y;
 	z += other.z;
+	return *this;
 }
 
 Vector3 Vector3::operator-(const Vector3& other)
@@ -46,11 +48,12 @@ Vector3 Vector3::operator-(const Vector3& other)
 	return Vector3(x - other.x, y - other.y, z - other.z);
 }
 
-void Vector3::operator-=(const Vector3& other)
+Vector3& Vector3::operator-=(const Vector3& other)
 {
 	x -= other.x;
 	y -= other.y;
 	z -= other.z;
+	return *this;
 }
 
 Vector3 Vector3::operator*(const float scalar)
@@ -100,7 +103,7 @@ returns magnitude of this vector
 */
 float Vector3::Magnitude()
 {
-	return sqrt(pow(x, 2) + pow(y, 2) + pow(z, 2));
+	return sqrt((x * x) + (y * y) + (z * z));
 }
 
 /*
@@ -109,9 +112,12 @@ normalize this Vector3
 void Vector3::Normalize()
 {
 	float magnitude = Magnitude();
-	x = x / magnitude;
-	y = y / magnitude;
-	z = z / magnitude;
+	//divide by zero check
+	if (magnitude)
+	{
+		//multiply by inverse, performance refactor
+		*this *= 1 / magnitude;
+	}
 }
 
 /*

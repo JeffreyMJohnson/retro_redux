@@ -102,7 +102,7 @@ returns magnitude of this vector
 */
 float Vector2::Magnitude()
 {
-	return sqrt(pow(x, 2) + pow(y, 2));
+	return sqrt((x * x) + (y * y));
 }
 
 /*
@@ -111,8 +111,12 @@ normalize this Vector2
 void Vector2::Normalize()
 {
 	float magnitude = Magnitude();
-	x = x / magnitude;
-	y = y / magnitude;
+	//check if divide by zero
+	if (magnitude)
+	{
+		//multiply by inverse for perf refactor
+		*this *= 1 / magnitude;
+	}
 }
 
 /*
