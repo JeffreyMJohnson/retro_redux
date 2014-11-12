@@ -234,6 +234,12 @@ public:
 	//returns a matrix3 the transpose of this. This matrix does not change
 	Matrix3 GetTranspose();
 
+	/*
+	returns new vector the result of transforming the given vector with this matrix. 
+	Both the given vector and this matrix remain unchanged.
+	*/
+	//Vector3 Transform(Vector3 v);
+
 	Matrix3& operator=(const Matrix3& rhs);
 
 	Matrix3 operator+(const Matrix3& rhs);
