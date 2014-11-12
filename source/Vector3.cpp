@@ -32,7 +32,14 @@ Vector3& Vector3::operator=(const Vector3& other)
 
 Vector3 Vector3::operator+(const Vector3& other)
 {
-	return Vector3(x + other.x, y + other.y, z + other.z);
+	Vector3 r = *this;
+	r += other;
+	return r;
+}
+
+Vector3 operator+(const Vector3& lhs, const Vector3& rhs)
+{
+	return (Vector3(lhs.x + rhs.x, lhs.y + rhs.y, lhs.z + rhs.z));
 }
 
 Vector3& Vector3::operator+=(const Vector3& other)
@@ -45,7 +52,14 @@ Vector3& Vector3::operator+=(const Vector3& other)
 
 Vector3 Vector3::operator-(const Vector3& other)
 {
-	return Vector3(x - other.x, y - other.y, z - other.z);
+	Vector3 r = *this;
+	r -= other;
+	return r;
+}
+
+Vector3 operator-(const Vector3& lhs, const Vector3& rhs)
+{
+	return Vector3(lhs.x - rhs.x, lhs.y - rhs.y, lhs.z - rhs.z);
 }
 
 Vector3& Vector3::operator-=(const Vector3& other)
@@ -149,6 +163,27 @@ Vector3 Vector3::CrossProduct(const Vector3& other)
 		(y * other.z) - (z * other.y),
 		(z * other.x) - (x * other.z),
 		(x * other.y) - (y * other.x));
+}
+
+/*
+Returns new vector linear interpolated the given percent of the given vectors
+i.e. (start + percent * (end - start))
+*/
+Vector3 Vector3::GetLERP(const Vector3& end, float const percent)
+{
+	Vector3 start = *this;
+	Vector3 norm = end - start;
+
+	return (*this + (end - *this) * percent);
+}
+
+/*
+Returns new vector linear interpolated the given percent of the given vectors
+i.e. (start + percent * (end - start))
+*/
+Vector3 Vector3::LERP(const Vector3& start, const Vector3& end, float percent)
+{
+	return (start + (end - start) * percent);
 }
 
 #endif

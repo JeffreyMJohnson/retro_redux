@@ -36,6 +36,11 @@ Vector2 Vector2::operator+(const Vector2& other)
 	return Vector2(x + other.x, y + other.y);
 }
 
+Vector2 operator+(const Vector2& lhs, const Vector2& rhs)
+{
+	return (Vector2(lhs.x + rhs.x, lhs.y + rhs.y));
+}
+
 Vector2& Vector2::operator+=(const Vector2& rhs)
 {
 	x += rhs.x;
@@ -48,10 +53,16 @@ Vector2 Vector2::operator-(const Vector2& other)
 	return Vector2(x - other.x, y - other.y);
 }
 
-void Vector2::operator-=(const Vector2& other)
+Vector2 operator-(const Vector2& lhs, const Vector2& rhs)
+{
+	return Vector2(lhs.x - rhs.x, lhs.y - rhs.y);
+}
+
+Vector2& Vector2::operator-=(const Vector2& other)
 {
 	x -= other.x;
 	y -= other.y;
+	return *this;
 }
 
 Vector2 Vector2::operator*(const float scalar)
@@ -143,12 +154,23 @@ Vector2 Vector2::GetPerp()
 	return Vector2(this->y, -this->x);
 }
 
+/*
+Returns new vector linear interpolated the given percent of the given vectors
+i.e. (start + percent * (end - start))
+*/
+Vector2 Vector2::GetLERP(const Vector2& end, float const percent)
+{
+	Vector2 start = *this;
+	Vector2 norm = end - start;
+
+	return (*this + (end - *this) * percent);
+}
 
 /*
 Returns new vector linear interpolated the given percent of the given vectors
 i.e. (start + percent * (end - start))
 */
-Vector2 Vector2::LERP(Vector2& start, Vector2& end, float percent)
+Vector2 Vector2::LERP(const Vector2& start, const Vector2& end, float percent)
 {
 	return (start + (end - start) * percent);
 }

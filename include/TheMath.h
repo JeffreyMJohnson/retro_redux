@@ -54,7 +54,7 @@ public:
 	Vector2& operator+=(const Vector2& rhs);
 
 	Vector2 operator-(const Vector2& other);
-	void operator-=(const Vector2& other);
+	Vector2& operator-=(const Vector2& other);
 
 	Vector2 operator*(const float scalar);
 	void operator*=(const float scalar);
@@ -99,7 +99,13 @@ public:
 	Returns new vector linear interpolated the given percent of the given vectors
 	i.e. (start + percent * (end - start))
 	*/
-	static Vector2 LERP(Vector2& start, Vector2& end, float percent);
+	Vector2 GetLERP(const Vector2& end, float const percent);
+
+	/*
+	Returns new vector linear interpolated the given percent of the given vectors
+	i.e. (start + percent * (end - start))
+	*/
+	static Vector2 LERP(const Vector2& start, const Vector2& end, float percent);
 
 };
 
@@ -173,7 +179,17 @@ public:
 	*/
 	Vector3 CrossProduct(const Vector3& other);
 
-	//need LERP function when cover that
+	/*
+	Returns new vector linear interpolated the given percent of the given vectors
+	i.e. (start + percent * (end - start))
+	*/
+	Vector3 GetLERP(const Vector3& end, float const percent);
+
+	/*
+	Returns new vector linear interpolated the given percent of the given vectors
+	i.e. (start + percent * (end - start))
+	*/
+	static Vector3 LERP(const Vector3& start, const Vector3& end, float percent);
 
 };
 
