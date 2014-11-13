@@ -46,10 +46,8 @@ public:
 	void Destroy();
 
 	Player* player;
-	float restartTimer;
 	float currentRestartTime;
 	Vector2 enemyGroupVelocity;
-	float enemyGroupSpeed;
 	bool gameOver;
 
 	std::vector<float> enemyColPositions;
@@ -156,17 +154,13 @@ private:
 	std::vector<Enemy*> attackingEnemies;
 
 
-	const char* scoreLabel;
 	char scoreAsString[20];
 
-	const char* highScoreLabel;
+	//const char* highScoreLabel;
 	char HighScoreAsString[20];
 
-
-	//position of score and label
-	Vector2 scorePos;
 	//position  of highscore and label
-	Vector2 highScorePos;
+	//Vector2 highScorePos;
 
 	int highScore;
 

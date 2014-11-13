@@ -104,10 +104,10 @@
     <ClInclude Include="include\SplashScreenState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\TheMath.h">
+    <ClInclude Include="include\MNF.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\MNF.h">
+    <ClInclude Include="include\TheMath.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

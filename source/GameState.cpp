@@ -10,13 +10,9 @@ GameState::GameState()
 	playerLives = 3;
 
 	gameOver = false;
-	scoreLabel = "1UP";
-	highScoreLabel = "HIGH SCORE";
-	scorePos = Vector2( MNF::SCREEN_WIDTH * .1f, MNF::SCREEN_HEIGHT);
-	highScorePos = Vector2( MNF::SCREEN_WIDTH * .5f - 75.0f, MNF::SCREEN_HEIGHT);
 	BaseState::score = 0;
 
-	playerLifeTextureID = CreateSprite("./images/misc/user_life_sprite.png", 35.0f, 41.0f, true);
+	playerLifeTextureID = CreateSprite("./images/misc/user_life_sprite.png", MNF::PLAYER_LIFE_TEXTURE_SIZE.x, MNF::PLAYER_LIFE_TEXTURE_SIZE.y, true);
 	srand(time(nullptr));
 	sendAttack = false;
 	enemyColMinX = 0.0f;
@@ -28,12 +24,8 @@ GameState::GameState()
 	attackVelocity = Vector2(-1, 1);
 	attackingEnemy = nullptr;
 
-	restartTimer = 5.0f;
 	currentRestartTime = 0.0f;
 	enemyGroupVelocity = Vector2(1, 0);
-
-
-	enemyGroupSpeed = 20.0f;
 
 }
 
@@ -53,8 +45,8 @@ void GameState::Initialize()
 	//initialize bulletManager static class
 	BulletManager::Init();
 
-	player = new Player("./images/player/galaxian_a.png", 46.0f, 69.0f);
-	player->Init(Vector2( MNF::SCREEN_WIDTH * 0.5f, 100.0f), Vector2(), 25.0f, 1);
+	player = new Player("./images/player/galaxian_a.png", MNF::PLAYER_SIZE.x, MNF::PLAYER_SIZE.y);
+	player->Init(MNF::PLAYER_INITIAL_POSITION, Vector2(), MNF::PLAYER_SPEED, 1);
 
 	gameObjects.push_back(player);
 
@@ -86,7 +78,7 @@ void GameState::Update(float a_timestep, StateMachine* a_SMPointer)
 	if (!player->alive)
 	{
 		//run pause timer here
-		if (currentRestartTime < restartTimer)
+		if (currentRestartTime < MNF::RESTART_TIMER)
 		{
 			currentRestartTime += a_timestep;
 		}
@@ -136,7 +128,7 @@ void GameState::Update(float a_timestep, StateMachine* a_SMPointer)
 	//update enemy group positions
 	for (float& colPos : enemyColPositions)
 	{
-		colPos += enemyGroupVelocity.x * enemyGroupSpeed * a_timestep;
+		colPos += enemyGroupVelocity.x * MNF::ENEMY_GROUP_SPEED * a_timestep;
 		//check if need to reverse
 		if (colPos >  MNF::SCREEN_WIDTH * 0.85f)
 		{
@@ -199,7 +191,7 @@ void GameState::Update(float a_timestep, StateMachine* a_SMPointer)
 	if (allEnemyDead)
 	{
 		//recycle the player restart timer
-		if (currentRestartTime >= restartTimer)
+		if (currentRestartTime >= MNF::RESTART_TIMER)
 		{
 			currentRestartTime = 0.0f;
 			NewLevelInit();
@@ -308,7 +300,7 @@ void GameState::EnemyLogic(Enemy* enemy, float timeDelta)
 
 	if (enemy->isAttacking && enemy->GetAttackState() != ATTACK)
 	{
-		enemy->position.x += enemyGroupVelocity.x * enemyGroupSpeed * timeDelta;
+		enemy->position.x += enemyGroupVelocity.x * MNF::ENEMY_GROUP_SPEED * timeDelta;
 	}
 
 	//player bullet collision logic
@@ -593,13 +585,13 @@ void GameState::GetAttackDirection()
 void GameState::DrawUI()
 {
 
-	DrawString(scoreLabel, scorePos.x, scorePos.y);
+	DrawString(MNF::SCORE_LABEL, MNF::SCORE_POSITION.x, MNF::SCORE_POSITION.y);
 	sprintf_s(scoreAsString, "%05d", BaseState::score);
-	DrawString(scoreAsString, scorePos.x, scorePos.y - 25, SColour(255, 0, 0, 255));
+	DrawString(scoreAsString, MNF::SCORE_POSITION.x, MNF::SCORE_POSITION.y - 25, SColour(255, 0, 0, 255));
 
-	DrawString(highScoreLabel, highScorePos.x, highScorePos.y);
+	DrawString(MNF::HIGH_SCORE_LABEL, MNF::HIGH_SCORE_POSITION.x, MNF::HIGH_SCORE_POSITION.y);
 	sprintf_s(HighScoreAsString, "%05d", highScore);
-	DrawString(HighScoreAsString,  MNF::SCREEN_WIDTH * .5f, highScorePos.y - 25, SColour(255, 0, 0, 255));
+	DrawString(HighScoreAsString, MNF::HIGH_SCORE_POSITION.x, MNF::HIGH_SCORE_POSITION.y - 25, SColour(255, 0, 0, 255));
 
 	//player lives
 	int paddingX = 40.0f;
