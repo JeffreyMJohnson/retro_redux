@@ -2,6 +2,13 @@
 #define _BULLET_MANAGER_H_
 #include <vector>
 #include "Bullet.h"
+
+enum TYPE
+{
+	PLAYER,
+	ENEMY
+};
+
 class BulletManager
 {
 public:
@@ -72,7 +79,7 @@ public:
 			//need to recycle bullets off screen
 			if (bullet->alive)
 			{
-				if (bullet->position.y > screenHeight + bullet->height * 0.5f){
+				if (bullet->position.y > MNF::SCREEN_HEIGHT + bullet->height * 0.5f){
 					bullet->alive = false;
 				}
 				if (bullet->position.y < bullet->height * 0.5f)

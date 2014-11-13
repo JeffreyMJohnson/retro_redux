@@ -189,7 +189,7 @@ void Enemy::Attack(float timeDelta, GameState* gameState)
 			attackExitChosen = false;
 
 			//set enemy x to original position and y to screen height
-			position = Vector2(gameState->GetEnemyGroupPosition(colPositionIndex, rowPositionIndex).x, screenHeight);
+			position = Vector2(gameState->GetEnemyGroupPosition(colPositionIndex, rowPositionIndex).x, MNF::SCREEN_HEIGHT);
 			attackState = RETURN;
 
 		}

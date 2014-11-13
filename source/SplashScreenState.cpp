@@ -18,8 +18,8 @@ SplashScreenState::~SplashScreenState()
 
 void SplashScreenState::Initialize()
 {
-	splashSpriteID = CreateSprite("./images/misc/galaxian_splash.png", screenWidth, screenHeight*.5f, true);
-	MoveSprite(splashSpriteID, screenWidth * 0.5f, screenHeight * .5f);
+	splashSpriteID = CreateSprite("./images/misc/galaxian_splash.png",  MNF::SCREEN_WIDTH, MNF::SCREEN_HEIGHT*.5f, true);
+	MoveSprite(splashSpriteID,  MNF::SCREEN_WIDTH * 0.5f, MNF::SCREEN_HEIGHT * .5f);
 
 	loadingMsg = "LOADING.";
 
@@ -56,7 +56,7 @@ void SplashScreenState::Draw()
 	if (!switchTime)
 	{
 		DrawSprite(splashSpriteID);
-		DrawString(loadingMsg.c_str(), screenWidth * 0.5f - 100, screenHeight *.25f - 20);
+		DrawString(loadingMsg.c_str(),  MNF::SCREEN_WIDTH * 0.5f - 100, MNF::SCREEN_HEIGHT *.25f - 20);
 	}
 
 

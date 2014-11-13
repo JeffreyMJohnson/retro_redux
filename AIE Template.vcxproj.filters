@@ -57,6 +57,9 @@
     <ClCompile Include="source\SplashScreenState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="source\MNF.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\BaseState.h">
@@ -83,9 +86,6 @@
     <ClInclude Include="include\CircleCollider.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\Utility.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\BulletManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -102,6 +102,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\SplashScreenState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\TheMath.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\MNF.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

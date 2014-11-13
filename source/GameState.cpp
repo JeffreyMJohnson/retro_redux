@@ -1,12 +1,5 @@
 #include "GameState.h"
 
-//global variables for position calculating
-extern const int screenWidth;
-extern const int screenHeight;
-
-//Row/Col magic numbers
-extern const int NUM_ENEMY_COLS;
-extern const int NUM_ENEMY_ROWS;
 
 //static score
 int BaseState::score;
@@ -19,8 +12,8 @@ GameState::GameState()
 	gameOver = false;
 	scoreLabel = "1UP";
 	highScoreLabel = "HIGH SCORE";
-	scorePos = Vector2(screenWidth * .1f, screenHeight);
-	highScorePos = Vector2(screenWidth * .5f - 75.0f, screenHeight);
+	scorePos = Vector2( MNF::SCREEN_WIDTH * .1f, MNF::SCREEN_HEIGHT);
+	highScorePos = Vector2( MNF::SCREEN_WIDTH * .5f - 75.0f, MNF::SCREEN_HEIGHT);
 	BaseState::score = 0;
 
 	playerLifeTextureID = CreateSprite("./images/misc/user_life_sprite.png", 35.0f, 41.0f, true);
@@ -61,7 +54,7 @@ void GameState::Initialize()
 	BulletManager::Init();
 
 	player = new Player("./images/player/galaxian_a.png", 46.0f, 69.0f);
-	player->Init(Vector2(screenWidth * 0.5f, 100.0f), Vector2(), 25.0f, 1);
+	player->Init(Vector2( MNF::SCREEN_WIDTH * 0.5f, 100.0f), Vector2(), 25.0f, 1);
 
 	gameObjects.push_back(player);
 
@@ -145,14 +138,14 @@ void GameState::Update(float a_timestep, StateMachine* a_SMPointer)
 	{
 		colPos += enemyGroupVelocity.x * enemyGroupSpeed * a_timestep;
 		//check if need to reverse
-		if (colPos > screenWidth * 0.85f)
+		if (colPos >  MNF::SCREEN_WIDTH * 0.85f)
 		{
-			colPos = screenWidth* 0.85f;
+			colPos =  MNF::SCREEN_WIDTH* 0.85f;
 			reverseGroup = true;
 		}
-		else if (colPos < screenWidth * 0.15f)
+		else if (colPos <  MNF::SCREEN_WIDTH * 0.15f)
 		{
-			colPos = screenWidth * 0.15f;
+			colPos =  MNF::SCREEN_WIDTH * 0.15f;
 			reverseGroup = true;
 		}
 	}
@@ -261,13 +254,13 @@ Creates each enemy object, setting their position in the group, and loading them
 void GameState::CreateEnemies()
 {
 	//first enemy's position
-	float enemyX = screenWidth * 0.2f;
-	float enemyY = screenHeight *0.8f;
+	float enemyX =  MNF::SCREEN_WIDTH * 0.2f;
+	float enemyY = MNF::SCREEN_HEIGHT *0.8f;
 
 	//load cols x positions
-	for (int colIndex = 0; colIndex < NUM_ENEMY_COLS; colIndex++)
+	for (int colIndex = 0; colIndex < MNF::NUM_ENEMY_COLS; colIndex++)
 	{
-		if (enemyX > screenWidth * 0.8f)
+		if (enemyX >  MNF::SCREEN_WIDTH * 0.8f)
 		{
 			//no more room so quit cols
 			break;
@@ -279,7 +272,7 @@ void GameState::CreateEnemies()
 	}
 
 	//load rows y positions 
-	for (int rowIndex = 0; rowIndex < NUM_ENEMY_ROWS; rowIndex++)
+	for (int rowIndex = 0; rowIndex < MNF::NUM_ENEMY_ROWS; rowIndex++)
 	{
 		enemyRowPositions.push_back(enemyY);
 		//minus enemy height
@@ -508,7 +501,7 @@ returns max and min y position values for all enemies
 */
 void GameState::GetEnemyColX(float& minX, float& maxX)
 {
-	minX = screenWidth;
+	minX =  MNF::SCREEN_WIDTH;
 	maxX = 0.0f;
 	for (auto object : gameObjects)
 	{
@@ -563,7 +556,7 @@ Helper function for attacking player
 void GameState::GetColExtremes(float& minX, float& maxX)
 {
 	//reset 
-	minX = screenWidth;
+	minX =  MNF::SCREEN_WIDTH;
 	maxX = 0.0f;
 	//loop through all enemies and find minX and maxX positions and set parameters to same
 	for (auto object : gameObjects)
@@ -606,14 +599,14 @@ void GameState::DrawUI()
 
 	DrawString(highScoreLabel, highScorePos.x, highScorePos.y);
 	sprintf_s(HighScoreAsString, "%05d", highScore);
-	DrawString(HighScoreAsString, screenWidth * .5f, highScorePos.y - 25, SColour(255, 0, 0, 255));
+	DrawString(HighScoreAsString,  MNF::SCREEN_WIDTH * .5f, highScorePos.y - 25, SColour(255, 0, 0, 255));
 
 	//player lives
 	int paddingX = 40.0f;
 	//start i at 1 because first life is playing
 	for (int i = 1; i < playerLives; i++)
 	{
-		MoveSprite(playerLifeTextureID, screenWidth * .05f + (paddingX * i), 25.0f);
+		MoveSprite(playerLifeTextureID,  MNF::SCREEN_WIDTH * .05f + (paddingX * i), 25.0f);
 		DrawSprite(playerLifeTextureID);
 	}
 
@@ -625,8 +618,8 @@ initialize objects for new level. called when all enemy dead
 void GameState::NewLevelInit()
 {
 	//first enemy's position
-	float enemyX = screenWidth * 0.2f;
-	float enemyY = screenHeight *0.8f;
+	float enemyX =  MNF::SCREEN_WIDTH * 0.2f;
+	float enemyY = MNF::SCREEN_HEIGHT *0.8f;
 
 	//init enemy
 	for (Entity* entity : gameObjects)
@@ -646,9 +639,9 @@ void GameState::NewLevelInit()
 			enemy->attackVelocity = Vector2();
 
 			//check if need new line of enemy
-			if (enemyX > screenWidth * 0.8f)
+			if (enemyX >  MNF::SCREEN_WIDTH * 0.8f)
 			{
-				enemyX = screenWidth * 0.2f;
+				enemyX =  MNF::SCREEN_WIDTH * 0.2f;
 				enemyY -= enemy->height;
 			}
 

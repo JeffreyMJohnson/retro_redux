@@ -1,9 +1,5 @@
 #include "..\include\EndGameState.h"
 
-//global variables for position calculating
-extern const int screenWidth;
-extern const int screenHeight;
-
 EndGameState::EndGameState()
 {
 }
@@ -29,14 +25,14 @@ void EndGameState::Update(float a_timeStep, StateMachine* a_SMPointer)
 
 void EndGameState::Draw()
 {
-	DrawString("GAME OVER", screenWidth * 0.5f - 100, screenHeight * .75f);
+	DrawString("GAME OVER",  MNF::SCREEN_WIDTH * 0.5f - 100, MNF::SCREEN_HEIGHT * .75f);
 
-	DrawString("SCORE", screenWidth * .25, screenHeight * .50);
+	DrawString("SCORE",  MNF::SCREEN_WIDTH * .25, MNF::SCREEN_HEIGHT * .50);
 	char score[10];
 	sprintf_s(score, "%05d", BaseState::score);
-	DrawString(score, screenWidth *0.5 + 50, screenHeight * .50);
+	DrawString(score,  MNF::SCREEN_WIDTH *0.5 + 50, MNF::SCREEN_HEIGHT * .50);
 
-	DrawString("PRESS <ESC> TO RETURN TO MAIN MENU", screenWidth * .5 - 280, screenHeight * .1);
+	DrawString("PRESS <ESC> TO RETURN TO MAIN MENU",  MNF::SCREEN_WIDTH * .5 - 280, MNF::SCREEN_HEIGHT * .1);
 }
 
 void EndGameState::Destroy()

@@ -6,7 +6,6 @@
 
 #include "AIE.h"
 #include "Entity.h"
-extern const int screenHeight;
 
 class Bullet : public Entity
 {

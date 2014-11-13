@@ -6,7 +6,9 @@ Bullet::Bullet(const char* filePath, float a_width, float a_height)
 	height = a_height;
 	alive = false;
 	spriteID = CreateSprite(filePath, a_width, a_height, true);
-	Init(Vector2(0, 0), Vector2(0, 0), 100, 15, 1);
+		
+	//Init(Vector2(), Vector2(), 100, 15, 1);
+	Init(Vector2(), Vector2(), MNF::BULLET_SPEED, 15, 1);
 }
 
 /*
@@ -44,13 +46,14 @@ void Bullet::Spawn(Vector2 a_pos, Vector2 a_velocity, float a_speed, int a_healt
 void Bullet::Update(float a_delta)
 {
 
-	position.x += velocity.x * speed * a_delta;
-	position.y += velocity.y * speed * a_delta;
+	//position.x += velocity.x * speed * a_delta;
+	//position.y += velocity.y * speed * a_delta;
+	position += velocity * speed * a_delta;
 	collider.center = position;
 
 	MoveSprite(spriteID, position.x, position.y);
 
-	if (position.y > screenHeight + (height * 0.5f))
+	if (position.y > MNF::SCREEN_HEIGHT + (height * 0.5f))
 	{
 		alive = false;
 	}
@@ -65,7 +68,7 @@ void Bullet::Update(float a_delta, bool underTest)
 	position.y += velocity.y * speed * a_delta;
 	collider.center = position;
 
-	if (position.y > screenHeight + (height * 0.5f))
+	if (position.y > MNF::SCREEN_HEIGHT + (height * 0.5f))
 	{
 		alive = false;
 	}

@@ -3,13 +3,8 @@
 #define _SPLASH_SCREEN_STATE_H_
 
 #include "BaseState.h"
-#include "Utility.h"
 #include "MainMenuState.h"
 #include <string>
-
-//global variables for position calculating
-extern const int screenWidth;
-extern const int screenHeight;
 
 class SplashScreenState :
 	public BaseState

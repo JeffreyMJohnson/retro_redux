@@ -20,16 +20,9 @@ you get before succumbing to the enemy hoard's?
 using namespace std;
 
 
-extern const int screenWidth = 600;
-extern const int screenHeight = 800;
-extern const int NUM_ENEMYS = 36;
-extern const int NUM_ENEMY_COLS = 9;
-extern const int NUM_ENEMY_ROWS = 4;
-
-
 int main(int argc, char* argv[])
 {
-	Initialise(screenWidth, screenHeight, false, "Galaxian Clone");
+	Initialise( MNF::SCREEN_WIDTH, MNF::SCREEN_HEIGHT, false, "Galaxian Clone");
 	SetBackgroundColour(SColour(0, 0, 0, 255));
 
 	StateMachine state;

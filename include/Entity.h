@@ -2,11 +2,8 @@
 #ifndef _ENTITY_H_
 #define _ENTITY_H_
 #include "TheMath.h"
-#include "Utility.h"
 #include "CircleCollider.h"
-
-extern const int screenWidth;
-extern const int screenHeight;
+#include "MNF.h"
 
 class Entity
 {

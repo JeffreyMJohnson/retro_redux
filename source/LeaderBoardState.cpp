@@ -1,7 +1,7 @@
 #include "..\include\LeaderBoardState.h"
 
-extern const int screenWidth;
-extern const int screenHeight;
+//extern const int screenWidth;
+//extern const int screenHeight;
 
 LeaderBoardState::LeaderBoardState()
 {
@@ -14,8 +14,8 @@ LeaderBoardState::~LeaderBoardState()
 
 void LeaderBoardState::Initialize()
 {
-	bannerSprite = CreateSprite("./images/misc/galaxian_banner.png", (float)screenWidth, screenHeight * .25f, true);
-	MoveSprite(bannerSprite, screenWidth * .5f, screenHeight - (screenHeight * .25f) * .5f);
+	bannerSprite = CreateSprite("./images/misc/galaxian_banner.png", (float) MNF::SCREEN_WIDTH, MNF::SCREEN_HEIGHT * .25f, true);
+	MoveSprite(bannerSprite,  MNF::SCREEN_WIDTH * .5f, MNF::SCREEN_HEIGHT - (MNF::SCREEN_HEIGHT * .25f) * .5f);
 
 	HighScores hScores;
 	hScores.LoadScores();
@@ -33,9 +33,9 @@ void LeaderBoardState::Update(float a_timeStep, StateMachine* a_SMPointer)
 void LeaderBoardState::Draw()
 {
 	DrawSprite(bannerSprite);
-	DrawString("HIGH SCORES", screenWidth * .5f - 100, screenHeight * .70f);
-	float yPos = screenHeight * .65f;
-	float xPos = screenWidth * .5f - 50;
+	DrawString("HIGH SCORES",  MNF::SCREEN_WIDTH * .5f - 100, MNF::SCREEN_HEIGHT * .70f);
+	float yPos = MNF::SCREEN_HEIGHT * .65f;
+	float xPos =  MNF::SCREEN_WIDTH * .5f - 50;
 
 	for (std::list<int>::iterator it = scores.begin(); it != scores.end(); it++)
 	{
@@ -46,7 +46,7 @@ void LeaderBoardState::Draw()
 		yPos -= 35;
 	}
 
-	DrawString("PRESS <ESC> TO RETURN TO MAIN MENU", screenWidth * .5 - 280, screenHeight * .1);
+	DrawString("PRESS <ESC> TO RETURN TO MAIN MENU",  MNF::SCREEN_WIDTH * .5 - 280, MNF::SCREEN_HEIGHT * .1);
 }
 void LeaderBoardState::Destroy()
 {

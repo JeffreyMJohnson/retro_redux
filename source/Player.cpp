@@ -59,9 +59,9 @@ void Player::Input()
 
 	if (IsKeyDown(GLFW_KEY_D))
 	{
-		if (position.x >= screenWidth - (height * 0.5f))
+		if (position.x >=  MNF::SCREEN_WIDTH - (height * 0.5f))
 		{
-			position.x = screenWidth - (height * 0.5f);
+			position.x =  MNF::SCREEN_WIDTH - (height * 0.5f);
 			velocity.x = 0;
 		}
 		else
@@ -98,9 +98,9 @@ void Player::Input(bool leftKeyDown, bool rightKeyDown, bool shootKeyDown, bool 
 
 	if (rightKeyDown)
 	{
-		if (position.x >= screenWidth - (height * 0.5f))
+		if (position.x >=  MNF::SCREEN_WIDTH - (height * 0.5f))
 		{
-			position.x = screenWidth - (height * 0.5f);
+			position.x =  MNF::SCREEN_WIDTH - (height * 0.5f);
 			velocity.x = 0;
 		}
 		else
@@ -138,7 +138,7 @@ void Player::Update(float a_delta)
 	else
 	{
 		//move to original position
-		position = Vector2(screenWidth * 0.5f, 100.0f);
+		position = Vector2( MNF::SCREEN_WIDTH * 0.5f, 100.0f);
 		MoveSprite(spriteID, position.x, position.y);
 		collider.center = position;
 	}

@@ -5,6 +5,7 @@
 
 #include "AIE.h"
 #include "StateMachine.h"
+#include "MNF.h"
 
 class StateMachine;
 

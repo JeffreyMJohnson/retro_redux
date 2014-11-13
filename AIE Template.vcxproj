@@ -104,6 +104,7 @@
     <ClCompile Include="source\LeaderBoardState.cpp" />
     <ClCompile Include="source\main.cpp" />
     <ClCompile Include="source\MainMenuState.cpp" />
+    <ClCompile Include="source\MNF.cpp" />
     <ClCompile Include="source\Player.cpp" />
     <ClCompile Include="source\SplashScreenState.cpp" />
     <ClCompile Include="source\StateMachine.cpp" />
@@ -120,10 +121,11 @@
     <ClInclude Include="include\HighScores.h" />
     <ClInclude Include="include\LeaderBoardState.h" />
     <ClInclude Include="include\MainMenuState.h" />
+    <ClInclude Include="include\MNF.h" />
     <ClInclude Include="include\Player.h" />
     <ClInclude Include="include\SplashScreenState.h" />
     <ClInclude Include="include\StateMachine.h" />
-    <ClInclude Include="include\Utility.h" />
+    <ClInclude Include="include\TheMath.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

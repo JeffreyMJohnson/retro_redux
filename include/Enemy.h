@@ -16,12 +16,6 @@
 
 class GameState;
 
-extern const int screenWidth;
-extern const int screenHeight;
-extern const int NUM_ENEMYS;
-
-
-
 enum attackStates
 {
 	WAIT,
