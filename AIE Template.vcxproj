@@ -67,7 +67,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <OutputFile>$(OutDir)$(ProjectName)_d.exe</OutputFile>
       <AdditionalLibraryDirectories>./libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>AIE_1st_Year_Framework_d.lib;kernel32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>JMath_static.lib;AIE_1st_Year_Framework_d.lib;kernel32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ProgramDatabaseFile>$(OutDir)$(ProjectName)_d.pdb</ProgramDatabaseFile>
     </Link>
   </ItemDefinitionGroup>
@@ -104,12 +104,9 @@
     <ClCompile Include="source\LeaderBoardState.cpp" />
     <ClCompile Include="source\main.cpp" />
     <ClCompile Include="source\MainMenuState.cpp" />
-    <ClCompile Include="source\Matrix3.cpp" />
     <ClCompile Include="source\Player.cpp" />
     <ClCompile Include="source\SplashScreenState.cpp" />
     <ClCompile Include="source\StateMachine.cpp" />
-    <ClCompile Include="source\Vector2.cpp" />
-    <ClCompile Include="source\Vector3.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\BaseState.h" />
@@ -126,11 +123,7 @@
     <ClInclude Include="include\Player.h" />
     <ClInclude Include="include\SplashScreenState.h" />
     <ClInclude Include="include\StateMachine.h" />
-    <ClInclude Include="include\TheMath.h" />
     <ClInclude Include="include\Utility.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
